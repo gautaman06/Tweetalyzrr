@@ -5,3 +5,19 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     block content
+    script(src='https://www.gstatic.com/firebasejs/3.6.8/firebase.js')
+    script.
+      // Initialize Firebase
+      var config = {
+      apiKey: "AIzaSyDQinimLMvuVuuxNEosGvn9smKB9wAsXKQ",
+      authDomain: "tweetalyze-73ec1.firebaseapp.com",
+      databaseURL: "https://tweetalyze-73ec1.firebaseio.com",
+      storageBucket: "tweetalyze-73ec1.appspot.com",
+      messagingSenderId: "563077606610"
+      };
+      firebase.initializeApp(config);
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script(src='/javascripts/client.js')
+    script(src='/javascripts/client.js')
