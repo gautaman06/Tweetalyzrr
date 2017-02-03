@@ -1,13 +1,12 @@
 doctype html
 html
   head
-    title= title
+    title Tweetalyze
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+
     script(src='https://www.gstatic.com/firebasejs/3.6.8/firebase.js')
     script.
-      // Initialize Firebase
+      //- Initialize Firebase
       var config = {
       apiKey: "AIzaSyDQinimLMvuVuuxNEosGvn9smKB9wAsXKQ",
       authDomain: "tweetalyze-73ec1.firebaseapp.com",
@@ -16,8 +15,37 @@ html
       messagingSenderId: "563077606610"
       };
       firebase.initializeApp(config);
+
+    // The code below initializes the sign-in widget from FirebaseUI web.
+    script(src='https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js')
+    link(type='text/css', rel='stylesheet', href='https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css')
+    script(type='text/javascript').
+      var uiConfig = {
+        signInSuccessUrl: 'loggedIn.html',
+        signInOptions: [
+        // Specify providers you want to offer your users.
+        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+        ],
+        // Terms of service url can be specified and will show up in the widget.
+        tosUrl: '<your-tos-url>'
+        };
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        // The start method will wait until the DOM is loaded.
+        ui.start('#firebaseui-auth-container', uiConfig);
+
+  //- Initialize Angular app
+  body(ng-app="tweetalyze")
+    //- Yields angular view
+    ui-view
+    block content
+    //- Firebase magic
+   
+    //- Backup CDNS
     script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+
+    //- Requiring component files
     script(src='/javascripts/client.js')
-    script(src='/javascripts/client.js')
+    script(src='/javascripts/auth/login/login.component.js')
