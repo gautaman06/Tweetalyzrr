@@ -14,4 +14,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url: '/index',
 		template: `<login></login>`
 	})
+
+  .state('sentimentSearch', {
+    url: '/search',
+    template: `<sentiment-search></sentiment-search>`
+  })
+
+  .state('sentimentShow', {
+    url: '/show',
+    template: `<sentiment-show></sentiment-show>`
+  })
 });
