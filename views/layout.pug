@@ -21,13 +21,13 @@ html
     link(type='text/css', rel='stylesheet', href='https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css')
     script(type='text/javascript').
       var uiConfig = {
-        signInSuccessUrl: 'loggedIn.html',
+        signInSuccessUrl: 'localhost:3000/search',
         signInOptions: [
         //- Specify providers you want to offer your users.
         firebase.auth.TwitterAuthProvider.PROVIDER_ID,
         ],
         //- Terms of service url can be specified and will show up in the widget.
-        tosUrl: '<your-tos-url>'
+        //-tosUrl: '<your-tos-url>'
         };
         //- Initialize the FirebaseUI Widget using Firebase.
         var ui = new firebaseui.auth.AuthUI(firebase.auth());
