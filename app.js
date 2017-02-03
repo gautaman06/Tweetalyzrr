@@ -4,29 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
 var mongoose = require('mongoose');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-var app = express
-
-// Connect to database
-if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.MONGODB_URI);
-}
-else {
-  mongoose.connect('mongodb://localhost/search');
-}
-mongoose.connection.on('error', function(err) {
-  console.error('MongoDB connection error: ' + err);
-  process.exit(-1);
-  }
-);
-mongoose.connection.once('open', function() {
-  console.log("Mongoose has connected to MongoDB!");
-});
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,7 +22,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(methodOverride('_method'));
 
 app.use('/', index);
 app.use('/users', users);
