@@ -45,7 +45,7 @@ html
     #firebaseui-auth-container
 
     button#signOut Sign Out
-    script document.getElementById('signOut').addEventListener('click', function(event) {console.log('logging out');firebase.auth().signOut();});
+    script document.getElementById('signOut').addEventListener('click', function(event) {console.log('logging out');firebase.auth().signOut();window.location.replace("/");});
 
     //- Backup CDNS
     script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js')
