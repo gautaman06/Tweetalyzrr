@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const twitterSearch = require('../services/twitterSearch.service');
+const twitterSearch = require('../services/twitterSearch.service').twitterSearch;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
