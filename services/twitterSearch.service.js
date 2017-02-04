@@ -10,7 +10,7 @@ const analyze = require('Sentimental').analyze;
 // Here be API keys
 const config = require('../secrets')
 
-searchTweets = function(text, callback) {
+batchAnalyze = function(text, callback) {
     // Initialize a new twitter client
   const twitterClient = new twitter(config);
   //                API end point  search param
@@ -26,4 +26,8 @@ searchTweets = function(text, callback) {
   })
   callback(results);
   });
+}
+
+streamAnalyze = function(text, callback) {
+    // put stuff here
 }
