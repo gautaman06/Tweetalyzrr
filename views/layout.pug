@@ -21,14 +21,13 @@ html
     link(type='text/css', rel='stylesheet', href='https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css')
     script(type='text/javascript').
       var uiConfig = {
-        signInSuccessUrl: '/#!/search',
+        signInSuccessUrl: 'dashboard.html',
         signInOptions: [
         //- Specify providers you want to offer your users.
         firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
         //- Terms of service url can be specified and will show up in the widget.
-        //- tosUrl: '<your-tos-url>'
+        //-tosUrl: '<your-tos-url>'
         };
         //- Initialize the FirebaseUI Widget using Firebase.
         var ui = new firebaseui.auth.AuthUI(firebase.auth());
@@ -36,9 +35,7 @@ html
         ui.start('#firebaseui-auth-container', uiConfig);
 
   //- Initialize Angular app
-  body(ng-app="tweetalyze")
-    //- Yields angular view
-    ui-view
+  body
     block content
     div
     h1(align='center', style='color:white;') Tweetalyze Login
@@ -55,5 +52,3 @@ html
     //- Requiring component files
     script(src='/javascripts/client.js')
     script(src='/javascripts/auth/login/login.component.js')
-    script(src='/javascripts/sentiments/sentimentSearch/sentimentSearch.component.js')
-    script(src='/javascripts/sentiments/sentimentShow/sentimentShow.component.js')
