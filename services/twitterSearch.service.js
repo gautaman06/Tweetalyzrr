@@ -1,32 +1,29 @@
 // Requiring some modules we'll be using 
 // to gather and analyze the tweets
 const util = require('util');
-const twitter = require('twitter');
-const sentimentAnalysis = require('./sentimentAnalysis.service');
-const config = require('../secrets')
-//     db = require('diskdb');
 
-// db = db.connect('db', ['sentiments']);
-console.log(config);
+// Sets up a new client to perform Twitter API interaction
+const twitter = require('twitter');
+// Sentiment analysis heavy lifting
+const analyze = require('Sentimental').analyze;
+
+// Here be API keys
+const config = require('../secrets')
 
 module.exports = function(text, callback) {
-  var twitterClient = new twitter(config);
-  var response = [];
-//   , dbData = []; // to store the tweets and sentiment
-
-  twitterClient.search(text, function(data) {
-    for (var i = 0; i < data.statuses.length; i++) {
-      var resp = {};
-
-      resp.tweet = data.statuses[i];
-      resp.sentiment = sentimentAnalysis(data.statuses[i].text);
-      dbData.push({
-        tweet: resp.tweet.text,
-        score: resp.sentiment.score
-      });
-      response.push(resp);
-    };
-    db.sentiments.save(dbData);
-    callback(response);
+    // Initialize a new twitter client
+  const twitterClient = new twitter(config);
+  //                API end point  search param
+  twitterClient.get('search/tweets', {q: text}, function(error, tweets, response) {
+  // Returns an array of objects with each tweet as an object 
+  // with sentiment analysis scores
+  let results = tweets.statuses.map( status => {
+      return {
+          text: status.text,
+          created_at: status.created_at,
+          sentiment: analyze(status.text)
+      };
+  })
+  callback(results);
   });
 }
