@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const twitterSearch = require('../services/twitterSearch.service');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -7,7 +8,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/search', function(req, res, next) {
-  res.render('sentimentSearch');
+  twitterSearch(req.body.search, function(data) {
+    res.json(data)
+  });
 });
 
 module.exports = router;
