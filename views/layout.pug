@@ -37,6 +37,7 @@ html
   //- Initialize Angular app
   body
     block content
+    ui-view
     div
     h1(align='center', style='color:white;') Tweetalyze Login
     #firebaseui-auth-container
@@ -54,3 +55,6 @@ html
     //- Requiring component files
     script(src='/javascripts/client.js')
     script(src='/javascripts/auth/login/login.component.js')
+    script(src='/javascripts/sentiments/sentimentShow/sentimentShow.component.js')
+    script(src='/javascripts/sentiments/sentimentSearch/sentimentSearch.component.js')
+
