@@ -37,18 +37,22 @@ const twitterSearch = function(text, callback) {
  **/
 // 
 const streamAnalyze = function(text, callback) {
-    // You can also get the stream in a callback if you prefer.
-    twitterClient.stream('statuses/filter', {track: text}, function(stream) {
-        stream.on('data', function(tweet) {
-            console.log(JSON.stringify(tweet, null, '  '));
-        });
+    // Initialize stream object
+    let stream = twitterClient.stream('statuses/filter', {track: text})
+    // Start stream
+    stream.on('data', function(tweet) {
 
-        stream.on('error', function(error) {
-            throw error;
-        });
+
+
+    });
+    // Error handler
+    stream.on('error', function(error) {
+        throw error;
     });
 };
+
 streamAnalyze('falcons', console.log('======'))
 module.exports.twitterSearch = twitterSearch;
 module.exports.streamAnalyze = streamAnalyze;
             
+
