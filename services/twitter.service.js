@@ -12,6 +12,8 @@ const config = require('../secrets')
 
 // Initialize a twitter module client with the config keys
 const twitterClient = new twitter(config);
+
+const io = require('../app')
 // Analyze a batch of tweets
 // const twitterSearch = function(text, callback) {
 // //   //                API end point     search param
@@ -46,7 +48,7 @@ module.exports = function(text, callback) {
             //     filteredTweet.sentiment = analyze(filteredTweet.text);
             // Add a sentiment property to the tweet object
             tweet.sentiment = analyze(tweet.text);
-            console.log('=======================================',tweet);
+            io.sockets.emit('tweet', tweet);
             // now send this off to io
             // ????
         });

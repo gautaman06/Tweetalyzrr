@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const io = require('../app')
 const streamAnalyze = require('../services/twitter.service');
 
 /* GET home page. */
@@ -39,10 +39,17 @@ router.get('/', function(req, res, next) {
 //   });
 // });
 
-router.get('/stream', function() {
-  streamAnalyze('#MuslimBan', function(data) {
-    res.json(data);
-  });
+router.get('/stream', function(req, res, next) {
+  console.log(req);
+  console.log('stream got hit');
+  streamAnalyze('#MuslimBan');
+
 });
+//
+// router.get('/stream', function() {
+//   streamAnalyze('#MuslimBan', function(data) {
+//     res.json(data);
+//   });
+// });
 
 module.exports = router;
