@@ -39,7 +39,7 @@ router.get('/search', function(req, res, next) {
   });
 });
 
-router.get('/stream', function() {
+router.get('/stream', function(req, res, next) {
   streamAnalyze('#MuslimBan', function(data) {
     res.json(data)
   });

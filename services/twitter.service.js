@@ -1,7 +1,7 @@
 // Requiring some modules we'll be using 
 // to gather and analyze the tweets
 const util = require('util');
-
+const io = require('../app').io
 // Sets up a new client to perform Twitter API interaction
 const twitter = require('twitter');
 // Sentiment analysis heavy lifting
@@ -37,22 +37,18 @@ const twitterSearch = function(text, callback) {
  **/
 // 
 const streamAnalyze = function(text, callback) {
-    twitterClient.stream('statuses/filter', { track: text }, function(stream) {
+    // You can also get the stream in a callback if you prefer.
+    twitterClient.stream('statuses/filter', {track: text}, function(stream) {
         stream.on('data', function(tweet) {
-            // Filtering the tweet to the values we want
-            // and sentiment analyzing them
-            let filteredTweet = {};
-                filteredTweet.text = tweet.text;
-                filteredTweet.created_at = tweet.created_at;
-                filteredTweet.sentiment = analyze(filteredTweet.text);
-                
-            callback(filteredTweet);
+            console.log(JSON.stringify(tweet, null, '  '));
         });
+
         stream.on('error', function(error) {
-            console.log(error);
+            throw error;
         });
-    }); 
+    });
 };
+streamAnalyze('falcons', console.log('======'))
 module.exports.twitterSearch = twitterSearch;
 module.exports.streamAnalyze = streamAnalyze;
             
