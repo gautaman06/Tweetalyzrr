@@ -1,5 +1,13 @@
 app.service('sentimentService', function($http) {
-    this.search = function() {
-        return $http.post('/search')
+    let isStreamOn = false;
+
+    this.stream = function() {
+        isStreamOn = true;
+        return $http.get('/stream');
+    }
+
+    if (isStreamOn) {
+        const socket = io.connect('/stream');
+        return socket
     }
 });

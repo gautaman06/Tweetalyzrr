@@ -43,7 +43,7 @@ router.get('/stream', function(req, res, next) {
   console.log(req);
   console.log('stream got hit');
   streamAnalyze('#MuslimBan');
-
+  res.status(200).send
 });
 //
 // router.get('/stream', function() {

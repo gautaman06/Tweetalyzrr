@@ -17,7 +17,6 @@ var app = express();
 // Set up socket.io connection
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-io.on('connection', function(){ /* … */ });
 server.listen(1337);
 
 // view engine setup
