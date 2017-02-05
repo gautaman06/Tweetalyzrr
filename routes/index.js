@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const twitterSearch = require('../services/twitterSearch.service').twitterSearch;
+const twitterSearch = require('../services/twitter.service').twitterSearch;
+const streamAnalyze = require('../services/twitter.service').streamAnalyze;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -35,6 +36,12 @@ router.get('/', function(req, res, next) {
 router.get('/search', function(req, res, next) {
   twitterSearch(req.body.search, function(data) {
     res.json(data);
+  });
+});
+
+router.get('/stream', function() {
+  streamAnalyze('#MuslimBan', function(data) {
+    res.json(data)
   });
 });
 
