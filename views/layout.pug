@@ -4,57 +4,19 @@ html
     title Tweetalyze
     link(rel='stylesheet', href='/stylesheets/style.css')
 
-    script(src='https://www.gstatic.com/firebasejs/3.6.8/firebase.js')
-    script.
-      //- Initialize Firebase
-      var config = {
-      apiKey: "AIzaSyDQinimLMvuVuuxNEosGvn9smKB9wAsXKQ",
-      authDomain: "tweetalyze-73ec1.firebaseapp.com",
-      databaseURL: "https://tweetalyze-73ec1.firebaseio.com",
-      storageBucket: "tweetalyze-73ec1.appspot.com",
-      messagingSenderId: "563077606610"
-      };
-      firebase.initializeApp(config);
-
-    //- The code below initializes the sign-in widget from FirebaseUI web.
-    script(src='https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js')
-    link(type='text/css', rel='stylesheet', href='https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css')
-    script(type='text/javascript').
-      var uiConfig = {
-        signInSuccessUrl: 'dashboard.html',
-        signInOptions: [
-        //- Specify providers you want to offer your users.
-        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-        ],
-        //- Terms of service url can be specified and will show up in the widget.
-        //-tosUrl: '<your-tos-url>'
-        };
-        //- Initialize the FirebaseUI Widget using Firebase.
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
-        //- The start method will wait until the DOM is loaded.
-        ui.start('#firebaseui-auth-container', uiConfig);
-
   //- Initialize Angular app
   body
     block content
     ui-view
-    div
-    h1(align='center', style='color:white;') Tweetalyze Login
-    #firebaseui-auth-container
-
-    button#signOut Sign Out
-    script document.getElementById('signOut').addEventListener('click', function(event) {console.log('logging out');firebase.auth().signOut();window.location.replace("/");});
+    p hello from layout
 
     //- Backup CDNS
     script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
 
-    // Socket IO for the client
-    script(src="/socket.io/socket.io.js")
     //- Requiring component files
     script(src='/javascripts/client.js')
-    script(src='/javascripts/auth/login/login.component.js')
-    script(src='/javascripts/sentiments/sentimentShow/sentimentShow.component.js')
-    script(src='/javascripts/sentiments/sentimentSearch/sentimentSearch.component.js')
-
+    script(src='/javascripts/components/search/search.component.js')
+    script(src='/javascripts/components/show/show.component.js')
+    script(src='/javascripts/components/stream.service.js')

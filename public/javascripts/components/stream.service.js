@@ -1,4 +1,4 @@
-app.service('sentimentService', function($http) {
+app.service('streamService', function($http) {
     let isStreamOn = false;
 
     this.stream = function() {

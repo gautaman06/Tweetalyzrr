@@ -1,6 +1,6 @@
-app.component('sentimentShow', {
-    templateUrl: '/javascripts/sentiments/sentimentShow/sentimentShow.html',
-    controller: function(sentiment) {
+app.component('show', {
+    templateUrl: '/javascripts/components/show/show.html',
+    controller: function(streamService) {
         console.log('hello from sentiment show component');
 
         // Pull in stream http get req
