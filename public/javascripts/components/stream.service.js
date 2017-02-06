@@ -7,8 +7,10 @@ app.service('streamService', function($http) {
         return $http.get('/stream');
     }
 
-    if (isStreamOn) {
-        const socket = io.connect('/stream');
-        return socket;
+    this.socket = function() {
+        let socket = io.connect('localhost:1337');
+        socket.on('tweet', function(data) {
+            console.log(data);
+        });
     }
 });

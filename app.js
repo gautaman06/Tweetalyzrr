@@ -13,9 +13,14 @@ var index = require('./routes/index');
 var app = express();
 
 // Set up socket.io connection
-var server = require('http').createServer(app);
+var server = require('http').Server(app);
 var io = require('socket.io')(server);
-server.listen(1337);
+
+// Socket middleware attaching io to res
+app.use(function(req, res, next) {
+  res.io = io;
+  next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -49,5 +54,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports.io = io;
-module.exports = app;
+
+module.exports = { app: app, server: server };

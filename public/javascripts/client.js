@@ -15,4 +15,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		template: `<search></search>`
 	})
 
+	// Show page
+	.state('show', {
+		url: '/show',
+		template: `<show></show>`
+	})
 });
