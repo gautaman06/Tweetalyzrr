@@ -3,10 +3,18 @@ const router = express.Router();
 const io = require('../app')
 const streamAnalyze = require('../services/twitter.service');
 
+let test = {
+  test: true,
+  five: 5
+};
 /* GET home page. */
 router.get('/', function(req, res, next) {
+// Example on how to use socket middleware
+  res.io.emit("socketToMe", test)
   res.render('index');
 });
+
+
 
 
 // req.body.search is the search the user performs

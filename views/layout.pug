@@ -8,13 +8,19 @@ html
   body(ng-app="tweetalyze")
     block content
     ui-view
+    script(src="https://cdn.socket.io/socket.io-1.3.5.js")
     p hello from layout
+    script.
+        let socket = io();
+        socket.on('socketToMe', function(data) {
+            // should return test object
+            console.log('This should be five:', data.five);
+        });
 
     //- Backup CDNS
     script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
-    script(src="https://cdn.socket.io/socket.io-1.3.5.js")
 
     //- Requiring component files
     script(src='/javascripts/client.js')
