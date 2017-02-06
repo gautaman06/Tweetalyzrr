@@ -1,8 +1,14 @@
 app.component('show', {
     templateUrl: '/javascripts/components/show/show.html',
     controller: function(streamService) {
-        console.log('hello from sentiment show component');
+        let results = [];
+        streamService.getSearchResults()
+        .then(res => {
+            results = res;
+        });
+        setTimeout(function() {console.log('searchresults results',results) }, 3000);
 
+        // console.log( bullshit);
         Highcharts.chart('container', {
           title: {
             text: 'Temperature Data'

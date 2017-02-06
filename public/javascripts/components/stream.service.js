@@ -1,4 +1,9 @@
 app.service('streamService', function($http) {
+    // Get 15 tweets with a search term
+    this.getSearchResults = function() {
+        return $http.get('/search');
+    }
+
     let isStreamOn = false;
 
     this.stream = function() {

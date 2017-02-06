@@ -10,20 +10,24 @@ const analyze = require('Sentimental').analyze;
 // Here be API keys
 const config = require('../secrets')
 
-module.exports = function(text, callback) {
+twitterSearch = function(text, callback) {
     // Initialize a new twitter client
   const twitterClient = new twitter(config);
   //                API end point  search param
-  twitterClient.get('search/tweets', {q: text}, function(error, tweets, response) {
+  twitterClient.get('search/tweets', { q: text }, function(error, tweets, response) {
   // Returns an array of objects with each tweet as an object
   // with sentiment analysis scores
   let results = tweets.statuses.map( status => {
       return {
-          text: status.text,
-          created_at: status.created_at,
-          sentiment: analyze(status.text)
-      };
+        text: status.text,
+        created_at: status.created_at,
+        // location: status.location, this doesnt work for some reason
+        sentiment: analyze(status.text),
+      }
   })
-  callback(results);
-  });
-}
+    callback(results);
+  })
+};
+
+
+module.exports = twitterSearch;

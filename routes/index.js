@@ -33,18 +33,19 @@ router.get('/', function(req, res, next) {
 //     }
 //   }
 // }
-// router.get('/search', function(req, res, next) {
-//   twitterSearch(req.body.search, function(data) {
-//     res.json(data);
-//   });
-// });
 
-router.get('/stream', function(req, res, next) {
-  console.log(req);
-  console.log('stream got hit');
-  streamAnalyze('#MuslimBan');
-  res.status(200).send
+router.get('/search', function(req, res, next) {
+  twitterSearch('#falcons', function(data) {
+    res.json(data);
+  });
 });
+
+// router.get('/stream', function(req, res, next) {
+//   console.log(req);
+//   console.log('stream got hit');
+//   streamAnalyze('#MuslimBan');
+//   res.status(200).send
+// });
 //
 // router.get('/stream', function() {
 //   streamAnalyze('#MuslimBan', function(data) {
