@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const io = require('../app')
+const io = require('../app').io;
 const streamAnalyze = require('../services/twitter.service');
 
 let test = {
@@ -10,7 +10,8 @@ let test = {
 /* GET home page. */
 router.get('/', function(req, res, next) {
 // Example on how to use socket middleware
-  res.io.emit("socketToMe", test)
+  // res.io.emit("socketToMe", test)
+  streamAnalyze('#MuslimBan');
   res.render('index');
 });
 
@@ -48,9 +49,7 @@ router.get('/', function(req, res, next) {
 // });
 
 router.get('/stream', function(req, res, next) {
-  console.log(req);
-  console.log('stream got hit');
-  streamAnalyze('#MuslimBan');
+  // req.body.search
   res.status(200).send
 });
 //

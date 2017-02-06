@@ -5,7 +5,7 @@ const app = angular.module('tweetalyze', ['ui.router']);
 app.config(function($stateProvider, $urlRouterProvider) {
 
 	// If the user goes astray, redirect to /home
-	$urlRouterProvider.otherwise('/index');
+	// $urlRouterProvider.otherwise('/index');
 
 	$stateProvider
 
