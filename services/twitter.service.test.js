@@ -4,8 +4,8 @@ const twitterSearch = require('./twitter.service');
 console.log('about to search twitter...');
 twitterSearch('@realdonaldtrump', function(data) {
     console.log('printing results:');
-    console.log(data.length)
-    // console.log(JSON.stringify(data, null, '  '));
+    // console.log(data.length)
+    console.log(JSON.stringify(data, null, '  '));
  });
 
 // console.log('About to stream some tweets');

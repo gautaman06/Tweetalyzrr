@@ -3,22 +3,37 @@ app.component('show', {
     controller: function(streamService) {
         let results = [];
         streamService.getSearchResults()
+        // We're in the promise land
+        // results is an array of objects that look like this:
+        // tweet = {
+        //     text: 'string'
+        //     creationMoment: time,
+        //     sentiment: {
+        //         positive: {}
+        //         negative: {}
+        //         score: integer
+        //     }
+        // }
         .then(res => {
-            results = res;
+            results = res.data;
+            return results
+        })
+        .then(results => {
+                let average = results.map(tweet => tweet.sentiment.score)
+                                     .reduce( (a, b) => a + b) / results.length;
+                console.log('this is the average, fuck a error message',average);
         });
-        setTimeout(function() {console.log('searchresults results',results) }, 3000);
-
-        // console.log( bullshit);
+        
         Highcharts.chart('container', {
           title: {
             text: 'Temperature Data'
           },
           xAxis: {
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-              'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+              'Jul', 'Aug', 'Sep', 'Oct', 'Nov'
             ]
           },
-          series: [{
+          series: [{                                                                            
             data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
           }]
         });
