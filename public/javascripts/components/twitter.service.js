@@ -1,4 +1,4 @@
-app.service('streamService', function($http) {
+app.service('twitterService', function($http) {
 
     // Get 100 recent tweets with this search term
     // let searchResults = [];

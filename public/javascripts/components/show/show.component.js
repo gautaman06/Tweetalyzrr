@@ -1,28 +1,13 @@
 app.component('show', {
     templateUrl: '/javascripts/components/show/show.html',
-    controller: function(streamService) {
-        let results = [];
-        streamService.create()
-        // We're in the promise land
-        // results is an array of objects that look like this:
-        // tweet = {
-        //     text: 'string'
-        //     creationMoment: time,
-        //     sentiment: {
-        //         positive: {}
-        //         negative: {}
-        //         score: integer
-        //     }
-        // }
-        .then(res => {
-            results = res.data;
-            return results
-        })
-        .then(results => {
-                let average = results.map(tweet => tweet.sentiment.score)
-                                     .reduce( (a, b) => a + b) / results.length;
-                console.log('this is the average, fuck a error message',average);
-        });
+    controller: function(twitterService) {
+      this.data = twitterService
+
+
+
+                // let average = results.map(tweet => tweet.sentiment.score)
+                //                      .reduce( (a, b) => a + b) / results.length;
+                // console.log('this is the average, fuck a error message',average);
 
         Highcharts.chart('container', {
           title: {
