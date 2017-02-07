@@ -1,13 +1,11 @@
 app.component('show', {
     templateUrl: '/javascripts/components/show/show.html',
     controller: function(twitterService) {
-      this.data = twitterService
-
-
-
-                // let average = results.map(tweet => tweet.sentiment.score)
-                //                      .reduce( (a, b) => a + b) / results.length;
-                // console.log('this is the average, fuck a error message',average);
+      this.data = twitterService.searchResults;
+      console.log('data in the component', this.data);
+      // this.data.average = this.data.map(tweet => tweet.sentiment.score)
+      //                              .reduce( (a, b) => a + b) / results.length;
+      // console.log(this.data)
 
         Highcharts.chart('container', {
           title: {
