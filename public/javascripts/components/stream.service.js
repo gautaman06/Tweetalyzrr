@@ -8,6 +8,10 @@ app.service('streamService', function($http) {
       console.log(searchQuery);
       return $http.get('/search/' + searchQuery);
     };
+
+    this.data = [];
+    this.timeStamp = [];
+    
     //
     // let isStreamOn = false;
     //
