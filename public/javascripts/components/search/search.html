@@ -1,8 +1,10 @@
 <h1>Welcome to Tweetalyze</h1>
 
 <form ng-submit="$ctrl.save()">
-    <input ng-model="searchQuery"
+    <input ng-model="$ctrl.searchQuery"
            type="text"
            placeholder="Put a hashtag here like #NotMyPresident">
     <input type="submit" value="Tweetalyze It!">
 </form>
+
+<p>{{searchQuery}}</p>

@@ -2,7 +2,7 @@ app.component('show', {
     templateUrl: '/javascripts/components/show/show.html',
     controller: function(streamService) {
         let results = [];
-        streamService.getSearchResults()
+        streamService.create()
         // We're in the promise land
         // results is an array of objects that look like this:
         // tweet = {
@@ -23,7 +23,7 @@ app.component('show', {
                                      .reduce( (a, b) => a + b) / results.length;
                 console.log('this is the average, fuck a error message',average);
         });
-        
+
         Highcharts.chart('container', {
           title: {
             text: 'Temperature Data'
@@ -33,7 +33,7 @@ app.component('show', {
               'Jul', 'Aug', 'Sep', 'Oct', 'Nov'
             ]
           },
-          series: [{                                                                            
+          series: [{
             data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
           }]
         });

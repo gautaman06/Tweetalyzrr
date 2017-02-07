@@ -34,8 +34,12 @@ router.get('/', function(req, res, next) {
 //   }
 // }
 
-router.get('/search', function(req, res, next) {
-  twitterSearch(req.body.searchQuery, function(data) {
+// router.get('/search/:searchQuery', function(req, res, next) {
+//     console.log('this is the req',req.params);
+//     res.json(req.params);
+// });
+router.get('/search/:searchQuery', function(req, res, next) {
+  twitterSearch(req.params.searchQuery, function(data) {
     res.json(data);
   });
 });

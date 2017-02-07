@@ -5,9 +5,10 @@ app.service('streamService', function($http) {
     };
 
     this.create = function(searchQuery) {
-      return $http.post('/search', searchQuery);
+      console.log(searchQuery);
+      return $http.get('/search/' + searchQuery);
     };
-    // 
+    //
     // let isStreamOn = false;
     //
     // this.stream = function() {

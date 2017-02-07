@@ -9,7 +9,7 @@ const twitter = require('twitter');
 const analyze = require('Sentimental').analyze;
 
 // Here be API keys
-const config = require('../secrets')
+const config = require('../secrets');
 
 twitterSearch = function(text, callback) {
     // Initialize a new twitter client
