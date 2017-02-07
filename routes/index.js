@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
 // }
 
 router.get('/search', function(req, res, next) {
-  twitterSearch('#falcons', function(data) {
+  twitterSearch(req.body.searchQuery, function(data) {
     res.json(data);
   });
 });
