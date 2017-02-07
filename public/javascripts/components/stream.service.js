@@ -1,17 +1,22 @@
 app.service('streamService', function($http) {
-    // Get 15 tweets with a search term
-    this.getSearchResults = function() {
-        return $http.get('/search');
-    };
 
-    this.create = function(searchQuery) {
+    // Get 100 recent tweets with this search term
+    // let searchResults = [];
+    this.getSearchResults = function(searchQuery) {
       console.log(searchQuery);
-      return $http.get('/search/' + searchQuery);
+      return $http.get('/search/' + searchQuery)
+      .then(results => {
+        console.log(results)
+      });
     };
 
-    this.data = [];
-    this.timeStamp = [];
-    
+    // this.data = res.data.map(tweet => {
+    //   return tweet.sentiment.score
+    // });
+    //
+    // this.data = [];
+    // this.timeStamp = [];
+
     //
     // let isStreamOn = false;
     //
