@@ -2,7 +2,7 @@ app.component('show', {
     templateUrl: '/javascripts/components/show/show.html',
     controller: function(twitterService) {
       this.data = twitterService.searchResults;
-      console.log('data in the component', this.data);
+      console.log('data in the show component', this.data);
       // this.data.average = this.data.map(tweet => tweet.sentiment.score)
       //                              .reduce( (a, b) => a + b) / results.length;
       // console.log(this.data)
