@@ -1,23 +1,34 @@
 app.component('show', {
     templateUrl: '/javascripts/components/show/show.html',
     controller: function(twitterService) {
-      this.data = twitterService.searchResults;
-      console.log('data in the show component', this.data);
+      this.searchResults = twitterService.searchResults; 
+
+      //remove tweets with sentiment score of zero
+      this.searchData = this.searchResults
+                        .filter(tweet => {
+                          return tweet.sentiment.score !== 0;
+                        });
+      console.log('data in the show component', this.searchData);
+
       // this.data.average = this.data.map(tweet => tweet.sentiment.score)
       //                              .reduce( (a, b) => a + b) / results.length;
       // console.log(this.data)
-
+      this.x = this.searchData.map(tweet => {
+        return tweet.time
+      });
+      this.y = this.searchData.map(tweet => {
+        return tweet.sentiment.score
+      });
+console.log('this should be data with no zero sentiment scores', this.y);
         Highcharts.chart('container', {
           title: {
-            text: 'Temperature Data'
+            text: 'Sentiment Analysis'
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-              'Jul', 'Aug', 'Sep', 'Oct', 'Nov'
-            ]
+            categories: this.x
           },
           series: [{
-            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+            data: this.y
           }]
         });
         Highcharts.chart('piecontainer', {
