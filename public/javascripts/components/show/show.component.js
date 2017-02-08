@@ -1,7 +1,7 @@
 app.component('show', {
     templateUrl: '/javascripts/components/show/show.html',
     controller: function(twitterService) {
-      this.searchResults = twitterService.searchResults; 
+      this.searchResults = twitterService.searchResults;
 
       //remove tweets with sentiment score of zero
       this.searchData = this.searchResults
@@ -39,7 +39,7 @@ console.log('this should be data with no zero sentiment scores', this.y);
                 type: 'pie'
             },
             title: {
-                text: 'Browser market shares January, 2015 to May, 2015'
+                text: 'Sentiment Share'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -58,28 +58,16 @@ console.log('this should be data with no zero sentiment scores', this.y);
                 }
             },
             series: [{
-                name: 'Brands',
+                name: 'Sentiment',
                 colorByPoint: true,
                 data: [{
-                    name: 'Microsoft Internet Explorer',
+                    name: 'Positive',
                     y: 56.33
                 }, {
-                    name: 'Chrome',
+                    name: 'Negative',
                     y: 24.03,
                     sliced: true,
                     selected: true
-                }, {
-                    name: 'Firefox',
-                    y: 10.38
-                }, {
-                    name: 'Safari',
-                    y: 4.77
-                }, {
-                    name: 'Opera',
-                    y: 0.91
-                }, {
-                    name: 'Proprietary or Undetectable',
-                    y: 0.2
                 }]
             }]
         });
