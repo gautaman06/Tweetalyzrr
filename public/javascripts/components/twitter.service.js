@@ -10,9 +10,6 @@ app.service('twitterService', function($http, $state) {
       return $http.get('/search/' + searchQuery)
       .then(results => {
         this.searchResults = results.data;
-        this.tweetText = this.searchResults.map(tweet => {
-          return tweet.text;
-        });
         $state.go('show');
         // console.log('these are the results in the service', results)
       });

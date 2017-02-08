@@ -2,7 +2,7 @@ app.component('show', {
     templateUrl: '/javascripts/components/show/show.html',
     controller: function(twitterService) {
       this.searchResults = twitterService.searchResults;
-      this.tweetText = twitterService.tweetText;
+      // this.tweetText = twitterService.tweetText;
       console.log('this is the tweetText:',this.tweetText);
 
       //remove tweets with sentiment score of zero
@@ -10,6 +10,11 @@ app.component('show', {
                         .filter(tweet => {
                           return tweet.sentiment.score !== 0;
                         });
+      this.tweetText = this.searchData
+                        .map(tweet => {
+                          return tweet.text;
+                        });
+
       console.log('data in the show component', this.searchData);
 
       // this.data.average = this.data.map(tweet => tweet.sentiment.score)
@@ -74,8 +79,6 @@ app.component('show', {
 
         this.percentageZero = this.zeroResults.length / this.searchResults.length;
 
-
-
         Highcharts.chart('piecontainer', {
             chart: {
                 plotBackgroundColor: null,
@@ -114,20 +117,8 @@ app.component('show', {
                     color: '#ED4337',
                     sliced: true,
                     selected: true
-                // }, {
-                //     name: 'Zero',
-                //     y: this.percentageZero
-
                 }]
             }]
         });
-
-
-        // Pull in stream http get req
-        // this.stream = sentiment.stream;
-        // socket.on('tweet', function (data) {
-        //     console.log("here is a tweet");
-        //     console.log(data);
-        // });
     }
 });
