@@ -3,16 +3,22 @@ app.service('twitterService', function($http, $state) {
 // ==== Get 100 recent tweets with this search term ==== \\
     // Initialize a variable to set results to
     this.searchResults = [];
+    this.tweetText = [];
 
     this.getSearchResults = function(searchQuery) {
       console.log(searchQuery);
       return $http.get('/search/' + searchQuery)
       .then(results => {
         this.searchResults = results.data;
+        this.tweetText = this.searchResults.map(tweet => {
+          return tweet.text;
+        });
         $state.go('show');
         // console.log('these are the results in the service', results)
       });
     };
+
+
 
 
 

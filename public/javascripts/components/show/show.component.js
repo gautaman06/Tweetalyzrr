@@ -2,6 +2,8 @@ app.component('show', {
     templateUrl: '/javascripts/components/show/show.html',
     controller: function(twitterService) {
       this.searchResults = twitterService.searchResults;
+      this.tweetText = twitterService.tweetText;
+      console.log('this is the tweetText:',this.tweetText);
 
       //remove tweets with sentiment score of zero
       this.searchData = this.searchResults
