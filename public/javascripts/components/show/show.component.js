@@ -19,7 +19,8 @@ app.component('show', {
       this.y = this.searchData.map(tweet => {
         return tweet.sentiment.score
       });
-console.log('this should be data with no zero sentiment scores', this.y);
+      console.log('this should be data with no zero sentiment scores', this.y);
+
         Highcharts.chart('container', {
           title: {
             text: 'Sentiment Analysis'
@@ -31,6 +32,26 @@ console.log('this should be data with no zero sentiment scores', this.y);
             data: this.y
           }]
         });
+
+        this.positiveResults = this.searchResults.filter(tweet => {
+          return tweet.sentiment.score > 0;
+        });
+
+        this.percentagePositive = this.positiveResults.length / this.searchResults.length;
+
+        this.negativeResults = this.searchResults.filter(tweet => {
+          return tweet.sentiment.score < 0;
+        });
+
+        this.percentageNegative = this.negativeResults.length / this.searchResults.length;
+
+        this.zeroResults = this.searchResults.filter(tweet => {
+          return tweet.sentiment.score === 0;
+        });
+
+        this.percentageZero = this.zeroResults.length / this.searchResults.length;
+
+
         Highcharts.chart('piecontainer', {
             chart: {
                 plotBackgroundColor: null,
@@ -62,12 +83,24 @@ console.log('this should be data with no zero sentiment scores', this.y);
                 colorByPoint: true,
                 data: [{
                     name: 'Positive',
-                    y: 56.33
+                    //i have an array of sentiment scores [1, 2, 3, 4, -1, -2, -3]
+                    //i need to push all of the positive sentiments into an array [1, 2, 3, 4]
+                    //and take the length of that array (4) and divide by length of original array
+                    //
+                    y: this.percentagePositive
                 }, {
                     name: 'Negative',
-                    y: 24.03,
+                    //i have an array of sentiment scores [1, 2, 3, 4, -1, -2, -3]
+                    //i need to push all of the negative sentiments into an array [-1, -2, -3]
+                    //add together the value of the negative sentiment array [-6]
+                    //-6
+                    y: this.percentageNegative,
                     sliced: true,
                     selected: true
+                // }, {
+                //     name: 'Zero',
+                //     y: this.percentageZero
+
                 }]
             }]
         });
