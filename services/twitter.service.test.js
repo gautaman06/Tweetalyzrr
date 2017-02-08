@@ -9,7 +9,7 @@ const twitterSearch = require('./twitter.service');
 //  });
 
 console.log('About to stream some tweets');
-streamAnalyze('swag', function(data) {
-    console.log('here\'s a tweet');
-    console.log(JSON.stringify(data, null, '  '));
-});
+// streamAnalyze('swag', function(data) {
+//     console.log(JSON.stringify(data, null, '  '));
+// });
+streamAnalyze('beer');

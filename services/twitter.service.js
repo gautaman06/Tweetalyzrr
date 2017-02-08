@@ -42,18 +42,19 @@ twitterSearch = function(text, callback) {
  **/
 
 // Initialize a point of storage for stream
-let streamData = [];
-
-streamAnalyze = function(text, callback) {
+let that = this;
+that.streamData = [];
+streamAnalyze = function(text) {
     // Use twitter client to start a stream of tweets, takes a callback
     twitterClient.stream('statuses/filter', { track: text }, function(stream) {
         // Resolve callback to start stream
         stream.on('data', function(tweet) {
-
+            console.log('heres a tweet', tweet.id);
             // Add sentiment analysis to each tweet object
-            tweet.sentiment = analyze(tweet.text);
-            // Push tweets into storage array
-            callback(tweet);
+            tweet.sentiment = analyze(tweet.text);  
+            //
+            that.streamData.push(tweet);
+            console.log(tweet);
         });
         stream.on('error', function(error) {
             console.log(error);
@@ -61,6 +62,7 @@ streamAnalyze = function(text, callback) {
     });
 };
 
-
-slicedData = streamData.slice
-module.exports = { twitterSearch: twitterSearch, streamAnalyze: streamAnalyze };
+module.exports = { twitterSearch: twitterSearch, 
+                   streamAnalyze: streamAnalyze,
+                   streamData: that.streamData 
+                 };
