@@ -5,23 +5,19 @@ const app = angular.module('tweetalyze', ['ui.router']);
 app.config(function($stateProvider, $urlRouterProvider) {
 
 	// If the user goes astray, redirect to /home
-	// $urlRouterProvider.otherwise('/index');
+	$urlRouterProvider.otherwise('/index');
 
 	$stateProvider
 
 	// Landing page, primarily filled with login component
 	.state('index', {
 		url: '/index',
-		template: `<login></login>`
+		template: `<search></search>`
 	})
 
-  .state('sentimentSearch', {
-    url: '/search',
-    template: `<sentiment-search></sentiment-search>`
-  })
+	.state('show', {
+		url: '/show',
+		template: `<show></show>`
+	})
 
-  .state('sentimentShow', {
-    url: '/show',
-    template: `<sentiment-show></sentiment-show>`
-  })
 });

@@ -8,9 +8,14 @@ var mongoose = require('mongoose');
 
 //ROUTES
 var index = require('./routes/index');
-var users = require('./routes/users');
 
+// Initialize Express App
 var app = express();
+
+// Set up socket.io connection
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+server.listen(1337);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,7 +30,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -45,4 +49,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+module.exports.io = io;
 module.exports = app;

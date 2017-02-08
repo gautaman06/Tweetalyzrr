@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const twitterSearch = require('../services/twitterSearch.service').twitterSearch;
+const io = require('../app')
+const streamAnalyze = require('../services/twitter.service');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -9,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 
 // req.body.search is the search the user performs
-// twitterSearch goes, grabs the tweets with that param, 
+// twitterSearch goes, grabs the tweets with that param,
 // sentiment analyzes them
 // and returns an array of objects which look like this:
 // {
@@ -32,10 +33,28 @@ router.get('/', function(req, res, next) {
 //     }
 //   }
 // }
-router.get('/search', function(req, res, next) {
-  twitterSearch(req.body.search, function(data) {
+
+// router.get('/search/:searchQuery', function(req, res, next) {
+//     console.log('this is the req',req.params);
+//     res.json(req.params);
+// });
+router.get('/search/:searchQuery', function(req, res, next) {
+  twitterSearch(req.params.searchQuery, function(data) {
     res.json(data);
   });
 });
+
+// router.get('/stream', function(req, res, next) {
+//   console.log(req);
+//   console.log('stream got hit');
+//   streamAnalyze('#MuslimBan');
+//   res.status(200).send
+// });
+//
+// router.get('/stream', function() {
+//   streamAnalyze('#MuslimBan', function(data) {
+//     res.json(data);
+//   });
+// });
 
 module.exports = router;
