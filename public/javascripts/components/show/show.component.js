@@ -28,9 +28,30 @@ app.component('show', {
             text: 'Sentiment Analysis'
           },
           xAxis: {
-            categories: this.x
+            title: {
+              text: 'Time'
+            },
+            categories: this.tweetText,
+            labels: {
+              enabled: false
+            },
+          },
+          yAxis: {
+            min: -12,
+            max: 12,
+            title: {
+              text: 'Sentiment Score'
+            },
+          },
+          legend: {
+            enabled: false
           },
           series: [{
+            zones: [{
+              value: 0,
+              color: '#ED4337'
+            }],
+            name: 'Sentiment Score',
             data: this.y
           }]
         });
@@ -52,6 +73,7 @@ app.component('show', {
         });
 
         this.percentageZero = this.zeroResults.length / this.searchResults.length;
+
 
 
         Highcharts.chart('piecontainer', {
@@ -85,18 +107,11 @@ app.component('show', {
                 colorByPoint: true,
                 data: [{
                     name: 'Positive',
-                    //i have an array of sentiment scores [1, 2, 3, 4, -1, -2, -3]
-                    //i need to push all of the positive sentiments into an array [1, 2, 3, 4]
-                    //and take the length of that array (4) and divide by length of original array
-                    //
                     y: this.percentagePositive
                 }, {
                     name: 'Negative',
-                    //i have an array of sentiment scores [1, 2, 3, 4, -1, -2, -3]
-                    //i need to push all of the negative sentiments into an array [-1, -2, -3]
-                    //add together the value of the negative sentiment array [-6]
-                    //-6
                     y: this.percentageNegative,
+                    color: '#ED4337',
                     sliced: true,
                     selected: true
                 // }, {
