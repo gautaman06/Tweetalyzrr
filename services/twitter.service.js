@@ -46,9 +46,9 @@ let that = this;
 that.streamData = [];
 streamAnalyze = function(text) {
     // Use twitter client to start a stream of tweets, takes a callback
-    twitterClient.stream('statuses/filter', { track: text }, function(stream) {
+    twitterClient.stream('statuses/filter', { track: text }, function(stream, error) {
         // Resolve callback to start stream
-        that.currentStream = stream
+        that.currentStream = stream;
         that.currentStream.on('data', function(tweet) {
             console.log('heres a tweet', tweet.id);
             // Add sentiment analysis to each tweet object
@@ -71,3 +71,4 @@ module.exports = { twitterSearch: twitterSearch,
                    streamData: that.streamData,
                    killCurrentStream: killCurrentStream
                  };
+

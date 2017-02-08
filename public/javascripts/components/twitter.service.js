@@ -1,6 +1,9 @@
 app.service('twitterService', function($http, $state) {
 
-// ==== Get 100 recent tweets with this search term ==== \\
+/**
+ * Get 100 recent tweets with this search term
+ **/
+
     // Initialize a variable to set results to
     this.searchResults = [];
 
@@ -10,31 +13,37 @@ app.service('twitterService', function($http, $state) {
       .then(results => {
         this.searchResults = results.data;
         $state.go('show');
-        // console.log('these are the results in the service', results)
       });
     };
 
+/**
+ * Stream statuses filtered by keyword
+ * number of tweets per second depends on topic popularity
+ **/
+    // Initialize an array to set results to 
+    this.streamResults = [];
 
+    this.streamOn = false;
 
-    // console.log('these are the results in the service, bound to stuff', searchResults)
-    // this.data = res.data.map(tweet => {
-    //   return tweet.sentiment.score
-    // });
-    //
-    // this.data = [];
-    // this.timeStamp = [];
-
-    //
-    // let isStreamOn = false;
-    //
-    // this.stream = function() {
-    //     isStreamOn = true;
-    //     console.log('we are streaming')
-    //     return $http.get('/stream');
-    // }
-    //
-    // if (isStreamOn) {
-    //     const socket = io.connect('/stream');
-    //     return socket;
-    // }
+    // $interval(function() {
+    //   console.log('interval hitting stream');
+    //   $http.get('/stream/update')
+    //   .then(results => {
+    //     console.log('got some data', results);
+    //     this.streamResults = results.data;
+    //   }) 
+    // }, 100)
+    // Initiate stream on the server by passing it a query
+    this.startStream = (streamQuery) => {
+      $http.get('/search/' + streamQuery)
+    };
+    
+    this.getStreamData = () => {
+      $http.get('/stream/update')
+      .then(results => {
+        console.log('got some data', results);
+        this.streamResults = results.data;
+      }); 
+    }
+    
 });

@@ -16,14 +16,19 @@ router.get('/search/:searchQuery', function(req, res, next) {
 });
 
 // Initialize the stream running on the server
-router.get('/stream/start', function(req, res, next) {
-  console.log('started stream')
-  streamAnalyze('Falcons');
+router.get('/stream/:streamQuery', function(req, res, next) {
+  streamAnalyze(req.params.streamQuery);
+  res.sendStatus(200);
+  res.json({text:'we searched with' + req.params.searchQuery})
+});
+
+router.get('/stream', function(req, res, next) {
+  streamAnalyze('falcons');
   res.sendStatus(200);
 });
+
 // Route hit by angular at intervals to update data
 router.get('/stream/update', function(req, res, next) {
-
   // Slicing off a portion of data from the data stream array to send to client
   let slicedData = streamData.slice(0, streamData.length);
 

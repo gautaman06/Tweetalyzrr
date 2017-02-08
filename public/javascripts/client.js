@@ -20,4 +20,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		template: `<show></show>`
 	})
 
+	.state('stream', {
+		url: '/stream',
+		template: `<stream></stream>`
+	})
+
+
 });

@@ -1,25 +1,76 @@
 app.component('show', {
     templateUrl: '/javascripts/components/show/show.html',
     controller: function(twitterService) {
-      this.data = twitterService.searchResults;
-      console.log('data in the show component', this.data);
+      this.searchResults = twitterService.searchResults;
+      this.tweetText = twitterService.tweetText;
+      console.log('this is the tweetText:',this.tweetText);
+
+      //remove tweets with sentiment score of zero
+      this.searchData = this.searchResults
+                        .filter(tweet => {
+                          return tweet.sentiment.score !== 0;
+                        });
+      console.log('data in the show component', this.searchData);
+
       // this.data.average = this.data.map(tweet => tweet.sentiment.score)
       //                              .reduce( (a, b) => a + b) / results.length;
       // console.log(this.data)
+      this.x = this.searchData.map(tweet => {
+        return tweet.time
+      });
+      this.y = this.searchData.map(tweet => {
+        return tweet.sentiment.score
+      });
+      console.log('this should be data with no zero sentiment scores', this.y);
 
         Highcharts.chart('container', {
           title: {
-            text: 'Temperature Data'
+            text: 'Sentiment Analysis'
           },
           xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-              'Jul', 'Aug', 'Sep', 'Oct', 'Nov'
-            ]
+            title: {
+              text: 'Time'
+            },
+            categories: this.tweetText,
+            labels: {
+              enabled: false
+            },
+          },
+          yAxis: {
+            min: -12,
+            max: 12,
+            title: {
+              text: 'Sentiment Score'
+            },
+          },
+          legend: {
+            enabled: false
           },
           series: [{
-            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+            name: 'Sentiment Score',
+            data: this.y
           }]
         });
+
+        this.positiveResults = this.searchResults.filter(tweet => {
+          return tweet.sentiment.score > 0;
+        });
+
+        this.percentagePositive = this.positiveResults.length / this.searchResults.length;
+
+        this.negativeResults = this.searchResults.filter(tweet => {
+          return tweet.sentiment.score < 0;
+        });
+
+        this.percentageNegative = this.negativeResults.length / this.searchResults.length;
+
+        this.zeroResults = this.searchResults.filter(tweet => {
+          return tweet.sentiment.score === 0;
+        });
+
+        this.percentageZero = this.zeroResults.length / this.searchResults.length;
+
+
         Highcharts.chart('piecontainer', {
             chart: {
                 plotBackgroundColor: null,
@@ -28,7 +79,7 @@ app.component('show', {
                 type: 'pie'
             },
             title: {
-                text: 'Browser market shares January, 2015 to May, 2015'
+                text: 'Sentiment Share'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -47,38 +98,30 @@ app.component('show', {
                 }
             },
             series: [{
-                name: 'Brands',
+                name: 'Sentiment',
                 colorByPoint: true,
                 data: [{
-                    name: 'Microsoft Internet Explorer',
-                    y: 56.33
+                    name: 'Positive',
+                    //i have an array of sentiment scores [1, 2, 3, 4, -1, -2, -3]
+                    //i need to push all of the positive sentiments into an array [1, 2, 3, 4]
+                    //and take the length of that array (4) and divide by length of original array
+                    //
+                    y: this.percentagePositive
                 }, {
-                    name: 'Chrome',
-                    y: 24.03,
+                    name: 'Negative',
+                    //i have an array of sentiment scores [1, 2, 3, 4, -1, -2, -3]
+                    //i need to push all of the negative sentiments into an array [-1, -2, -3]
+                    //add together the value of the negative sentiment array [-6]
+                    //-6
+                    y: this.percentageNegative,
                     sliced: true,
                     selected: true
-                }, {
-                    name: 'Firefox',
-                    y: 10.38
-                }, {
-                    name: 'Safari',
-                    y: 4.77
-                }, {
-                    name: 'Opera',
-                    y: 0.91
-                }, {
-                    name: 'Proprietary or Undetectable',
-                    y: 0.2
+                // }, {
+                //     name: 'Zero',
+                //     y: this.percentageZero
+
                 }]
             }]
         });
-
-
-        // Pull in stream http get req
-        // this.stream = sentiment.stream;
-        // socket.on('tweet', function (data) {
-        //     console.log("here is a tweet");
-        //     console.log(data);
-        // });
     }
 });
