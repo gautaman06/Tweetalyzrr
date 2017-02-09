@@ -1,4 +1,4 @@
-app.service('twitterService', function($http, $state) {
+app.service('twitterService', function($http, $state, $interval) {
 
 /**
  * Get 100 recent tweets with this search term
@@ -23,19 +23,38 @@ app.service('twitterService', function($http, $state) {
     // Initialize an array to set results to 
     this.streamResults = [];
 
-    this.streamOn = false;
 
-    // $interval(function() {
-    //   console.log('interval hitting stream');
-    //   $http.get('/stream/update')
-    //   .then(results => {
-    //     console.log('got some data', results);
-    //     this.streamResults = results.data;
-    //   }) 
-    // }, 100)
+
+    this.tweetScores = [];
+    this.tweetTimes = [];
+    this.tweetText = [];
+    
+    let timer = null;
+
     // Initiate stream on the server by passing it a query
     this.startStream = (streamQuery) => {
-      $http.get('/search/' + streamQuery)
+      $http.get('/stream/' + streamQuery).then( (response) => {
+        this.getUpdate();
+        timer = $interval( () => {
+          console.log('we are polling');
+          this.getUpdate();
+        }, 5000);
+      });
+    };
+
+    this.getUpdate = () => {
+      $http.get('/stream/update').then( (response) => {
+        let tweets = response.data.map( tweet => tweet.text );
+        this
+        console.log('polling got data:', tweets);
+      });
+    };
+
+    this.stopPolling = () => {
+      if (angular.isDefined(timer)) {
+        $interval.cancel(timer);
+        timer = undefined;
+      }
     };
     
     this.getStreamData = () => {
@@ -45,5 +64,9 @@ app.service('twitterService', function($http, $state) {
         this.streamResults = results.data;
       }); 
     }
-    
+
+    this.updateStream = function() {
+      
+    }
 });
+

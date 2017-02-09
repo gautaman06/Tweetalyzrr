@@ -17,7 +17,7 @@ const twitterClient = new twitter(config);
 /**
  * Get 100 tweets based on a search input
  **/
-twitterSearch = function(text, callback) {
+const twitterSearch = function(text, callback) {
     // Initialize a new twitter client
   //                API end point  search param
   twitterClient.get('search/tweets', { q: text, count: 100 }, function(error, tweets, response) {
@@ -44,18 +44,20 @@ twitterSearch = function(text, callback) {
 // Initialize a point of storage for stream
 let that = this;
 that.streamData = [];
-streamAnalyze = function(text) {
+const streamAnalyze = function(text) {
+    killCurrentStream();
+    console.log('\n\n=== starting stream analyze for text:', text);
     // Use twitter client to start a stream of tweets, takes a callback
     twitterClient.stream('statuses/filter', { track: text }, function(stream, error) {
         // Resolve callback to start stream
         that.currentStream = stream;
         that.currentStream.on('data', function(tweet) {
-            console.log('heres a tweet', tweet.id);
+            // console.log('heres a tweet', tweet.id);
             // Add sentiment analysis to each tweet object
             tweet.sentiment = analyze(tweet.text);  
             //
             that.streamData.push(tweet);
-            console.log(tweet);
+            console.log(tweet.text);
         });
         stream.on('error', function(error) {
             console.log(error);
@@ -64,7 +66,11 @@ streamAnalyze = function(text) {
 };
 
 killCurrentStream = function() {
-    that.currentStream.destroy();
+    if (that.currentStream) {
+      console.log('\n\n=== killing stream... ===');
+      that.currentStream.destroy();
+      that.currentStream = null;
+    }
 }
 module.exports = { twitterSearch: twitterSearch, 
                    streamAnalyze: streamAnalyze,

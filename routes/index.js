@@ -15,14 +15,7 @@ router.get('/search/:searchQuery', function(req, res, next) {
   });
 });
 
-// Initialize the stream running on the server
-router.get('/stream/:streamQuery', function(req, res, next) {
-  streamAnalyze(req.params.streamQuery);
-  res.sendStatus(200);
-  res.json({text:'we searched with' + req.params.searchQuery})
-});
-
-router.get('/stream', function(req, res, next) {
+router.get('/stream/test', function(req, res, next) {
   streamAnalyze('falcons');
   res.sendStatus(200);
 });
@@ -30,19 +23,25 @@ router.get('/stream', function(req, res, next) {
 // Route hit by angular at intervals to update data
 router.get('/stream/update', function(req, res, next) {
   // Slicing off a portion of data from the data stream array to send to client
-  let slicedData = streamData.slice(0, streamData.length);
-
-  // Send it off to client
-  res.json(slicedData);
+  let copyOfStreamData = streamData.slice(0, streamData.length);
 
   // Empty the array so it can be refilled
-  slicedData.length = 0;
-  
+  streamData.length = 0;
+
+  // Send it off to client
+  res.json(copyOfStreamData);
 });
 
 router.get('/stream/stop', function(req, res, next) {
   killCurrentStream();
+  res.sendStatus(200);
 });
 
+// Initialize the stream running on the server
+router.get('/stream/:streamQuery', function(req, res, next) {
+  streamAnalyze(req.params.streamQuery);
+  res.sendStatus(200);
+  // res.json({text:'we searched with' + req.params.searchQuery})
+});
 
 module.exports = router;
