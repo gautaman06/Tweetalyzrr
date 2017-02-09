@@ -1,7 +1,7 @@
 app.component('stream', {
     templateUrl: '/javascripts/components/stream/stream.html',
     controller: function(twitterService, $log, $timeout, $scope, $interval, $state) {
-    
+
       this.tweetText = twitterService.tweetText
       this.tweetScores = twitterService.tweetScores
       this.tweetTimes = twitterService.tweetTimes
@@ -18,7 +18,8 @@ app.component('stream', {
               text: 'Sentiment Analysis'
           },
           yAxis: {
-              // Maybe add min and max
+              min: -12,
+              max: 12,
               title: {
                   text: 'Sentiment Score'
               }
@@ -32,10 +33,13 @@ app.component('stream', {
                 enabled: false
               },
           },
+          legend: {
+            enabled: false
+          },
           plotOptions: {
               line: {
                   dataLabels: {
-                      enabled: true
+                      enabled: false
                   },
                   enableMouseTracking: true
               }
@@ -66,4 +70,3 @@ app.component('stream', {
 
   } // End of controller
 }); // End of component
-
