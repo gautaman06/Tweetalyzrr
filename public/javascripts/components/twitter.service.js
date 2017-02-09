@@ -75,7 +75,6 @@ app.service('twitterService', function($http, $state, $interval) {
       }
     };
 
-
     this.updateStream = function() {
 
     }

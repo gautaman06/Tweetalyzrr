@@ -7,7 +7,7 @@ app.component('stream', {
       this.tweetTimes = twitterService.tweetTimes;
       this.filteredResponse = twitterService.filteredResponse;
       this.positiveResults = twitterService.positiveResults;
-      $timeout(() => {console.log('positive results:', this.positiveResults)}, 2000);
+
 
       // this.positiveResults = this.filteredResponse.filter(tweet => { tweet.tweetScores > 0 });
       // console.log('positive results:', this.positiveResults);
@@ -32,8 +32,8 @@ app.component('stream', {
               text: 'Sentiment Analysis'
           },
           yAxis: {
-              min: -12,
-              max: 12,
+              min: -15,
+              max: 15,
               title: {
                   text: 'Sentiment Score'
               }
@@ -46,6 +46,10 @@ app.component('stream', {
               labels: {
                 enabled: false
               },
+              type: 'datetime',
+              minTickInterval: 100,
+              minRange: 0,
+              maxRange: 100 * 5
           },
           legend: {
             enabled: false
@@ -78,13 +82,55 @@ app.component('stream', {
               // this.chartConfig.series[0].data.shift();
               // this.chartConfig.series[0].data.push(Math.floor(Math.random() * 20) + 1);
               this.poll();
-          }, 2000);
+          }, 10);
       };
 
       this.$onInit = () => {
           $log.log("hello");
           this.poll();
       }; // End of chartConfig
+
+      this.chartConfig2 = {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Sentiment Share'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Sentiment',
+                colorByPoint: true,
+                data: [{
+                    name: 'Positive',
+                    y: 50
+                }, {
+                    name: 'Negative',
+                    color: '#ED4337',
+                    y: 50,
+                    sliced: true,
+                    selected: true
+                }]
+            }]
+      };
 
   } // End of controller
 }); // End of component
