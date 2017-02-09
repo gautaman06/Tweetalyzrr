@@ -5,26 +5,6 @@ app.component('show', {
     // },
     controller: function(twitterService, $log, $timeout, $scope) {
       this.searchResults = twitterService.searchResults;
-      // this.tweetText = twitterService.tweetText;
-      // console.log('this is the tweetText:',this.tweetText);
-
-      //remove tweets with sentiment score of zero
-      // this.searchData = this.searchResults
-      //                   .filter(tweet => {
-      //                     return tweet.sentiment.score !== 0;
-      //                   });
-      // console.log('data in the show component', this.searchData);
-
-      // this.data.average = this.data.map(tweet => tweet.sentiment.score)
-      //                              .reduce( (a, b) => a + b) / results.length;
-      // console.log(this.data)
-      // this.x = this.searchData.map(tweet => {
-      //   return tweet.time
-      // });
-      // this.y = this.searchData.map(tweet => {
-      //   return tweet.sentiment.score
-      // });
-      // console.log('this should be data with no zero sentiment scores', this.y);
 
           this.chartConfig = {
               options: {
@@ -76,7 +56,7 @@ app.component('show', {
                   this.chartConfig.series[1].data.shift();
                   this.chartConfig.series[1].data.push(Math.floor(Math.random() * 20) + 1);
                   this.poll();
-              }, 2000);
+              }, 500);
           };
 
           this.$onInit = () => {
@@ -86,6 +66,26 @@ app.component('show', {
 
       }
 
+      // this.tweetText = twitterService.tweetText;
+      // console.log('this is the tweetText:',this.tweetText);
+
+      //remove tweets with sentiment score of zero
+      // this.searchData = this.searchResults
+      //                   .filter(tweet => {
+      //                     return tweet.sentiment.score !== 0;
+      //                   });
+      // console.log('data in the show component', this.searchData);
+
+      // this.data.average = this.data.map(tweet => tweet.sentiment.score)
+      //                              .reduce( (a, b) => a + b) / results.length;
+      // console.log(this.data)
+      // this.x = this.searchData.map(tweet => {
+      //   return tweet.time
+      // });
+      // this.y = this.searchData.map(tweet => {
+      //   return tweet.sentiment.score
+      // });
+      // console.log('this should be data with no zero sentiment scores', this.y);
 
 
 

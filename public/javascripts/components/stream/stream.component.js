@@ -1,128 +1,69 @@
 app.component('stream', {
     templateUrl: '/javascripts/components/stream/stream.html',
-    controller: function(twitterService, $interval, $state) {
+    controller: function(twitterService, $log, $timeout, $scope, $interval, $state) {
+    
+      this.tweetText = twitterService.tweetText
+      this.tweetScores = twitterService.tweetScores
+      this.tweetTimes = twitterService.tweetTimes
 
-        this.tweetText = twitterService.tweetText
-        this.tweetScores = twitterService.tweetScores
-        this.tweetTimes = twitterService.tweetTimes
 
-        Highcharts.chart('container', {
-          series: [{
-            name: 'Sentiment Score',
-            data: this.tweetScores
-          }],
-          chart: {
-            events: {
-                load: () => {
-                    if (this.series) {
-                      let series = this.series[0];
-                      $interval(() => {
-                          console.log('updating the chart?');
-                          console.log(this.tweetText);
-                          let x = this.tweetText;
-                          let y = this.tweetScores;
-                          series.addPoint([x,y], true, true);
-                      }, 1000);
-                    }
-                  }
-            }
+      this.chartConfig = {
+          options: {
+              chart: {
+                  type: 'area'
+              }
           },
+
           title: {
-            text: 'Sentiment Analysis'
-          },
-          xAxis: {
-            title: {
-              text: 'Time'
-            },
-            categories: this.tweetText,
-            labels: {
-              enabled: false
-            },
+              text: 'Sentiment Analysis'
           },
           yAxis: {
-            min: -12,
-            max: 12,
-            title: {
-              text: 'Sentiment Score'
-            },
+              // Maybe add min and max
+              title: {
+                  text: 'Sentiment Score'
+              }
           },
-          legend: {
-            enabled: false
+          xAxis: {
+              title: {
+                  text: 'Time'
+              },
+              categories: this.tweetText,
+              labels: {
+                enabled: false
+              },
           },
-        });
+          plotOptions: {
+              line: {
+                  dataLabels: {
+                      enabled: true
+                  },
+                  enableMouseTracking: true
+              }
+          },
+          series: [
+              {
+                  name: 'Sentiment Score',
+                  data: this.tweetScores
+              }
+          ]
+      };
 
-        // this.positiveResults = this.searchResults.filter(tweet => {
-        //   return tweet.sentiment.score > 0;
-        // });
+      this.poll = () => {
+          $timeout(() => {
+              console.log('polling twitter service')
+              twitterService.getUpdate();
+              // Here is where you could poll a REST API or the websockets service for live data
+              // this.chartConfig.series[0].data.shift();
+              // this.chartConfig.series[0].data.push(Math.floor(Math.random() * 20) + 1);
+              this.poll();
+          }, 2000);
+      };
 
-        // this.percentagePositive = this.positiveResults.length / this.searchResults.length;
+      this.$onInit = () => {
+          $log.log("hello");
+          this.poll();
+      }; // End of chartConfig
 
-        // this.negativeResults = this.searchResults.filter(tweet => {
-        //   return tweet.sentiment.score < 0;
-        // });
+  } // End of controller
+}); // End of component
 
-        // this.percentageNegative = this.negativeResults.length / this.searchResults.length;
-
-        // this.zeroResults = this.searchResults.filter(tweet => {
-        //   return tweet.sentiment.score === 0;
-        // });
-
-        // this.percentageZero = this.zeroResults.length / this.searchResults.length;
-
-
-    //     Highcharts.chart('piecontainer', {
-    //         chart: {
-    //             plotBackgroundColor: null,
-    //             plotBorderWidth: null,
-    //             plotShadow: false,
-    //             type: 'pie'
-    //         },
-    //         title: {
-    //             text: 'Sentiment Share'
-    //         },
-    //         tooltip: {
-    //             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    //         },
-    //         plotOptions: {
-    //             pie: {
-    //                 allowPointSelect: true,
-    //                 cursor: 'pointer',
-    //                 dataLabels: {
-    //                     enabled: true,
-    //                     format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-    //                     style: {
-    //                         color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-    //                     }
-    //                 }
-    //             }
-    //         },
-    //         series: [{
-    //             name: 'Sentiment',
-    //             colorByPoint: true,
-    //             data: [{
-    //                 name: 'Positive',
-    //                 //i have an array of sentiment scores [1, 2, 3, 4, -1, -2, -3]
-    //                 //i need to push all of the positive sentiments into an array [1, 2, 3, 4]
-    //                 //and take the length of that array (4) and divide by length of original array
-    //                 //
-    //                 y: this.percentagePositive
-    //             }, {
-    //                 name: 'Negative',
-    //                 //i have an array of sentiment scores [1, 2, 3, 4, -1, -2, -3]
-    //                 //i need to push all of the negative sentiments into an array [-1, -2, -3]
-    //                 //add together the value of the negative sentiment array [-6]
-    //                 //-6
-    //                 y: this.percentageNegative,
-    //                 sliced: true,
-    //                 selected: true
-    //             // }, {
-    //             //     name: 'Zero',
-    //             //     y: this.percentageZero
-
-    //             }]
-    //         }]
-    //     });
-    
-        
-    }
-});
