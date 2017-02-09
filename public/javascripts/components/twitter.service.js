@@ -25,7 +25,7 @@ app.service('twitterService', function($http, $state, $interval) {
     this.tweetScores = [];
     this.tweetTimes = [];
     this.tweetText = [];
-    
+    this.filteredResponse = [];
     let timer = null;
 
     // Initiate stream on the server by passing it a query
@@ -48,7 +48,6 @@ app.service('twitterService', function($http, $state, $interval) {
         // Map out y-axis data
         let tweetScores = filteredResponse.map( tweet => tweet.sentiment.score );
         // Push these onto the array because we don't want it to reset each interval
-
         this.tweetScores.push.apply(this.tweetScores, tweetScores);
 
         console.log('This is just tweetScores',tweetScores);
@@ -62,6 +61,10 @@ app.service('twitterService', function($http, $state, $interval) {
         let tweetText   = filteredResponse.map( tweet => tweet.text );
         this.tweetText.push.apply(this.tweetText, tweetText);
 
+        //Pie chart data
+        let positiveResults = filteredResponse.filter( tweet => tweet.tweetScores );
+
+
       });
     };
 
@@ -71,10 +74,9 @@ app.service('twitterService', function($http, $state, $interval) {
         timer = undefined;
       }
     };
-    
+
 
     this.updateStream = function() {
-      
+
     }
 });
-

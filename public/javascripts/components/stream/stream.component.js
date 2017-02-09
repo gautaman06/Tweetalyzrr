@@ -2,10 +2,24 @@ app.component('stream', {
     templateUrl: '/javascripts/components/stream/stream.html',
     controller: function(twitterService, $log, $timeout, $scope, $interval, $state) {
 
-      this.tweetText = twitterService.tweetText
-      this.tweetScores = twitterService.tweetScores
-      this.tweetTimes = twitterService.tweetTimes
+      this.tweetText = twitterService.tweetText;
+      this.tweetScores = twitterService.tweetScores;
+      this.tweetTimes = twitterService.tweetTimes;
+      this.filteredResponse = twitterService.filteredResponse;
+      this.positiveResults = twitterService.positiveResults;
+      $timeout(() => {console.log('positive results:', this.positiveResults)}, 2000);
 
+      // this.positiveResults = this.filteredResponse.filter(tweet => { tweet.tweetScores > 0 });
+      // console.log('positive results:', this.positiveResults);
+      //
+      // this.percentagePositive = this.positiveResults.length / this.filteredResponse.length;
+      // console.log('percentage positive:',this.percentagePositive);
+      //
+      // this.negativeResults = this.filteredResponse.filter(tweet => {
+      //   return tweet.tweetScores < 0;
+      // });
+      //
+      // this.percentageNegative = this.negativeResults.length / this.filteredResponse.length;
 
       this.chartConfig = {
           options: {
@@ -46,6 +60,10 @@ app.component('stream', {
           },
           series: [
               {
+                  zones: [{
+                    value: 0,
+                    color: '#ED4337'
+                  }],
                   name: 'Sentiment Score',
                   data: this.tweetScores
               }
