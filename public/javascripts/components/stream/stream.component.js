@@ -7,7 +7,10 @@ app.component('stream', {
       this.tweetTimes = twitterService.tweetTimes;
       this.filteredResponse = twitterService.filteredResponse;
       this.positiveResults = twitterService.positiveResults;
-
+      this.positivePercentage = twitterService.positivePercentage;
+      console.log('these are the positive results:', this.positiveResults);
+      this.negativePercentage = twitterService.negativePercentage;
+      console.log('these are the positive results:', this.positiveResults);
 
       // this.positiveResults = this.filteredResponse.filter(tweet => { tweet.tweetScores > 0 });
       // console.log('positive results:', this.positiveResults);
@@ -82,7 +85,7 @@ app.component('stream', {
               // this.chartConfig.series[0].data.shift();
               // this.chartConfig.series[0].data.push(Math.floor(Math.random() * 20) + 1);
               this.poll();
-          }, 10);
+          }, 5000);
       };
 
       this.$onInit = () => {
@@ -121,11 +124,11 @@ app.component('stream', {
                 colorByPoint: true,
                 data: [{
                     name: 'Positive',
-                    y: 50
+                    y: this.positivePercentage
                 }, {
                     name: 'Negative',
                     color: '#ED4337',
-                    y: 50,
+                    y: this.negativePercentage,
                     sliced: true,
                     selected: true
                 }]
