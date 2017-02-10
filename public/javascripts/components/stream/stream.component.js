@@ -1,17 +1,28 @@
 app.component('stream', {
     templateUrl: '/javascripts/components/stream/stream.html',
-    controller: function(twitterService, $log, $timeout, $scope, $interval, $state) {
+    controller: function(twitterService, $log, $scope, $interval, $state) {
 
       this.tweetText = twitterService.tweetText;
       this.tweetScores = twitterService.tweetScores;
       this.tweetTimes = twitterService.tweetTimes;
       this.filteredResponse = twitterService.filteredResponse;
       this.positiveResults = twitterService.positiveResults;
+<<<<<<< HEAD
       this.positivePercentage = twitterService.positivePercentage;
       console.log('these are the positive results:', this.positiveResults);
       this.negativePercentage = twitterService.negativePercentage;
       console.log('these are the positive results:', this.positiveResults);
 
+=======
+
+      
+      // Need this to restart stream
+      this.query = twitterService.query;
+      this.restartStream = () => {
+        twitterService.restartStream(this.query);
+        this.poll();
+      }
+>>>>>>> Buttons to start, stop, restart, and search a different term are all bueno
       // this.positiveResults = this.filteredResponse.filter(tweet => { tweet.tweetScores > 0 });
       // console.log('positive results:', this.positiveResults);
       //
@@ -23,7 +34,7 @@ app.component('stream', {
       // });
       //
       // this.percentageNegative = this.negativeResults.length / this.filteredResponse.length;
-
+  
       this.chartConfig = {
           options: {
               chart: {
@@ -76,22 +87,33 @@ app.component('stream', {
               }
           ]
       };
-
       this.poll = () => {
-          $timeout(() => {
-              console.log('polling twitter service')
+          this.interval = $interval(() => {
               twitterService.getUpdate();
+
               // Here is where you could poll a REST API or the websockets service for live data
               // this.chartConfig.series[0].data.shift();
               // this.chartConfig.series[0].data.push(Math.floor(Math.random() * 20) + 1);
               this.poll();
-          }, 5000);
+
+          }, 3000);
+
+      };
+      // Starts polling process
+      this.$onInit = () => {
+          twitterService.getUpdate();
+          this.poll();
+
+      }; // End of chartConfig
+
+      // Function to stop polling
+      this.stopPoll = () => {  
+        twitterService.stopPolling();
+        $interval.cancel(this.interval);
+        console.log('stopPoll function hit');  
       };
 
-      this.$onInit = () => {
-          $log.log("hello");
-          this.poll();
-      }; // End of chartConfig
+
 
       this.chartConfig2 = {
             chart: {
