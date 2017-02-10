@@ -3,8 +3,55 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
+  /*background: #263238;
+  color: #fff;*/
+  font-weight: 300;
+}
+
 a {
   color: #00B7FF;
+}
+
+/*.searchbar {
+  width: 600px;
+  height: 100px;
+}*/
+
+.searchbar {
+  max-width: 30rem;
+  margin: 0 auto;
+  /*font-family: 'Roboto Mono', cursive;*/
+  /*display: block;*/
+  width: 100%;
+  padding: 1.5rem 2rem;
+  font-size: 2rem;
+  margin-top: 3rem;
+  /*border: 0;*/
+  text-align: center;
+  font-weight: 500;
+  /*opacity: 0;*/
+  /*animation: fade-in 300ms 1100ms forwards ;*/
+  /*@include placeholder {*/
+    /*font-family: 'Bangers', cursive;*/
+    /*letter-spacing: 0.03em;
+  }*/
+}
+
+.wrapper {
+  padding: 3rem 1rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.titleblock {
+  text-align: center;
 }
 
 #chart1 {
