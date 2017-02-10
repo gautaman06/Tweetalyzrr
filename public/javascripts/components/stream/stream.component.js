@@ -15,19 +15,7 @@ app.component('stream', {
       this.restartStream = () => {
         twitterService.restartStream(this.query);
         this.poll();
-      }
-
-      // this.positiveResults = this.filteredResponse.filter(tweet => { tweet.tweetScores > 0 });
-      // console.log('positive results:', this.positiveResults);
-      //
-      // this.percentagePositive = this.positiveResults.length / this.filteredResponse.length;
-      // console.log('percentage positive:',this.percentagePositive);
-      //
-      // this.negativeResults = this.filteredResponse.filter(tweet => {
-      //   return tweet.tweetScores < 0;
-      // });
-      //
-      // this.percentageNegative = this.negativeResults.length / this.filteredResponse.length;
+      };
 
       this.chartConfig = {
           options: {
@@ -107,6 +95,7 @@ app.component('stream', {
         $interval.cancel(this.interval);
       };
 
+//Pie chart - work in progress
       // this.chartConfig2 = {
       //       chart: {
       //           plotBackgroundColor: null,

@@ -15,15 +15,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		template: `<search></search>`
 	})
 
-	.state('show', {
-		url: '/show',
-		template: `<show></show>`
-	})
-
 	.state('stream', {
 		url: '/stream',
 		template: `<stream></stream>`
 	})
+
 	.state('about', {
 		url: '/about',
 		template: `
@@ -39,5 +35,4 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	  </div>
 		`
 	})
-
 });

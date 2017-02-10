@@ -27,8 +27,6 @@ const twitterSearch = function(text, callback) {
       return {
         text: status.text,
         time: status.created_at,
-        // creationMoment: moment(Date(status.created_at)).format('LLL'),
-        // location: status.location, this doesnt work for some reason
         sentiment: analyze(status.text),
       }
   })
@@ -54,7 +52,7 @@ const streamAnalyze = function(text) {
         that.currentStream.on('data', function(tweet) {
             // console.log('heres a tweet', tweet.id);
             // Add sentiment analysis to each tweet object
-            tweet.sentiment = analyze(tweet.text);  
+            tweet.sentiment = analyze(tweet.text);
             //
             that.streamData.push(tweet);
             console.log(tweet.text);
@@ -72,9 +70,8 @@ killCurrentStream = function() {
       that.currentStream = null;
     }
 }
-module.exports = { twitterSearch: twitterSearch, 
+module.exports = { twitterSearch: twitterSearch,
                    streamAnalyze: streamAnalyze,
                    streamData: that.streamData,
                    killCurrentStream: killCurrentStream
                  };
-
