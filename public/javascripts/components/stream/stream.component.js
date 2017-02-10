@@ -1,13 +1,22 @@
 app.component('stream', {
     templateUrl: '/javascripts/components/stream/stream.html',
-    controller: function(twitterService, $log, $timeout, $scope, $interval, $state) {
+    controller: function(twitterService, $log, $scope, $interval, $state) {
 
       this.tweetText = twitterService.tweetText;
       this.tweetScores = twitterService.tweetScores;
       this.tweetTimes = twitterService.tweetTimes;
       this.filteredResponse = twitterService.filteredResponse;
 
-      //line chart
+
+      
+      // Need this to restart stream
+      this.query = twitterService.query;
+
+      this.restartStream = () => {
+        twitterService.restartStream(this.query);
+        this.poll();
+      }
+
       this.chartConfig = {
           options: {
               chart: {
@@ -59,6 +68,7 @@ app.component('stream', {
                   data: this.tweetScores
               }
           ]
+
       }; // End of chartconfig1
 
       this.poll = () => {
@@ -66,10 +76,11 @@ app.component('stream', {
               console.log('polling twitter service')
               twitterService.getUpdate();
 
-              // this.poll();
-          }, 1000);
-      };
 
+          }, 3000);
+
+      };
+      // Starts polling process
       this.$onInit = () => {
           $log.log("hello");
           twitterService.initialPieChart();
@@ -81,6 +92,13 @@ app.component('stream', {
       this.stopPoll = () => {
         twitterService.stopPolling();
         $interval.cancel(this.interval);
+      };
+
+      // Function to stop polling
+      this.stopPoll = () => {  
+        twitterService.stopPolling();
+        $interval.cancel(this.interval);
+        console.log('stopPoll function hit');  
       };
 
       this.chartConfig2 = {
