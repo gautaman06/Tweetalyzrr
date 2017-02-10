@@ -8,7 +8,7 @@ app.component('stream', {
       this.filteredResponse = twitterService.filteredResponse;
 
 
-      
+
       // Need this to restart stream
       this.query = twitterService.query;
 
@@ -75,6 +75,7 @@ app.component('stream', {
           $interval(() => {
               console.log('polling twitter service')
               twitterService.getUpdate();
+              if (this.filteredResponse.length > 100) this.filteredResponse.splice(0, 25); 
 
 
           }, 3000);
@@ -95,10 +96,10 @@ app.component('stream', {
       };
 
       // Function to stop polling
-      this.stopPoll = () => {  
+      this.stopPoll = () => {
         twitterService.stopPolling();
         $interval.cancel(this.interval);
-        console.log('stopPoll function hit');  
+        console.log('stopPoll function hit');
       };
 
       this.chartConfig2 = {

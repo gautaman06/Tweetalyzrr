@@ -102,7 +102,6 @@ app.service('twitterService', function($http, $state, $interval) {
       });
     };
 
-<<<<<<< HEAD
     this.initialPieChart = () => {
         // let positiveResults = this.filteredResponse.filter( tweet => tweet.sentiment.score > 0);
         // this.positiveResults.push.apply(this.positiveResults, positiveResults);
@@ -118,10 +117,6 @@ app.service('twitterService', function($http, $state, $interval) {
       };
 
     this.stopPolling = () => {
-      $http.get('/stream/stop');
-=======
-    this.stopPolling = () => {
         $http.get('/stream/stop');
->>>>>>> highcharts-ng
     };
 });
