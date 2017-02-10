@@ -5,6 +5,7 @@ body {
   align-items: center;
   text-align: center;
   font-family: 'Lato', sans-serif;
+  color: #616161;
 }
 
 a {
@@ -25,15 +26,35 @@ a {
   /*border: 0;*/
   letter-spacing: 0.03em;
   text-align: center;
-  @include placeholder {
-    letter-spacing: 0.13em;
-  }
+}
+
+input {
+  color:   #616161;
 }
 
 .wrapper {
   padding: 3rem 1rem;
   margin: 0 auto;
   text-align: center;
+}
+.streamContainer {
+  width: 100%;
+}
+.chartdisplay {
+  width: 1000px;
+  float: left;
+}
+.numbers {
+  width: 200px;
+  float:left;
+}
+.clear {
+  clear: both;
+}
+#chart1 {
+  height: 25rem;
+  margin: 0 auto;
+  width: 70%;
 }
 
 .title {
@@ -54,11 +75,7 @@ a {
   margin-top: 0;
 }
 
-#chart1 {
-  width: 90%;
-  height: 25rem;
-  margin: 0 auto;
-}
+
 
 .footer {
   position: absolute;
@@ -74,7 +91,6 @@ a {
     position: relative;
     background-color: #00aced;
     border: none;
-    border-radius: 20px;
     font-size: 18px;
     color: #FFFFFF;
     padding: 20px;
@@ -91,7 +107,7 @@ a {
   border: none;
   font-size: 12px;
   color: #FFFFFF;
-  padding: 20px;
+  padding: 10px;
   width: 100px;
   cursor: pointer;
 }
@@ -102,7 +118,7 @@ a {
   border: none;
   font-size: 12px;
   color: #FFFFFF;
-  padding: 20px;
+  padding: 10px;
   width: 100px;
   margin-left: 10px;
   margin-right: 10px;
@@ -115,7 +131,20 @@ a {
   border: none;
   font-size: 12px;
   color: #FFFFFF;
-  padding: 20px;
+  padding: 10px;
   width: 100px;
   cursor: pointer;
+}
+
+.negative {
+  color: #ED4337;
+}
+
+.positive {
+  color: rgb(124, 181, 236);
+  font-weight: bold;
+}
+
+.sentiment {
+  color: #74AD1B;
 }
