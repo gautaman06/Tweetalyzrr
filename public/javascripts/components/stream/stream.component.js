@@ -1,6 +1,6 @@
 app.component('stream', {
     templateUrl: '/javascripts/components/stream/stream.html',
-    controller: function(twitterService, $log, $scope, $interval, $state) {
+    controller: function(twitterService, $log, $scope, $interval, $timeout, $state) {
 
       this.tweetText = twitterService.tweetText;
       this.tweetScores = twitterService.tweetScores;
