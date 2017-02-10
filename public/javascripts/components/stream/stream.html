@@ -1,8 +1,25 @@
-<h1>Stream Show!</h1>
 
-<button ui-sref="index">Back To Search</button>
-<button ng-click="$ctrl.stopPoll()"> Stop</button>
-<button ng-click="$ctrl.restartStream($ctrl.query)"> Restart</button>
-<highchart id="chart1" config="$ctrl.chartConfig"></highchart>
+<div class="streamContainer">
+  <h1 class="titleStream">Tweetalyze</h1>
+  <br />
+  <br />
+  <div class="chartdisplay">
+    <highchart id="chart1" config="$ctrl.chartConfig"></highchart>
 
-<highchart id="chart2" config="$ctrl.chartConfig2"></highchart>
+  </div>
+  <div class='numbers'>
+    <br />
+    <br />
+    <br />
+    <h1>Analysis</h1>
+    <h2 class="positive">{{$ctrl.positivePercentage}}% Positive</h2>
+    <h2 class="negative">{{$ctrl.negativePercentage}}% Negative</h2>
+    <h2 class="sentiment">{{$ctrl.tweetCount}} tweets and growing</h2>
+  </div>
+</div>
+<br class="clear">
+
+
+<button class="backbutton" ui-sref="index">Back</button>
+<button class="stopbutton" ng-click="$ctrl.stopPoll()"> Stop</button>
+<button class="startbutton" ng-click="$ctrl.restartStream($ctrl.query)"> Restart</button>

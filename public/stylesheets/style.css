@@ -1,14 +1,150 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  color: #616161;
 }
 
 a {
   color: #00B7FF;
 }
 
+.searchbar {
+  max-width: 40rem;
+  margin: 0 auto;
+  /*display: block;*/
+  width: 100%;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  /*padding: 1.5rem 2rem;*/
+  font-size: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  /*border: 0;*/
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+input {
+  color:   #616161;
+}
+
+.wrapper {
+  padding: 3rem 1rem;
+  margin: 0 auto;
+  text-align: center;
+}
+.streamContainer {
+  width: 100%;
+}
+.chartdisplay {
+  width: 1000px;
+  float: left;
+}
+.numbers {
+  width: 200px;
+  float:left;
+}
+.clear {
+  clear: both;
+}
 #chart1 {
-  width: 90%;
   height: 25rem;
   margin: 0 auto;
+  width: 70%;
+}
+
+.title {
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
+  font-size: 68px;
+  letter-spacing: 0.07em;
+  margin-bottom: 0;
+}
+
+
+.titleStream {
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
+  font-size: 48px;
+  letter-spacing: 0.07em;
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}
+
+.tweetalyzeit {
+    position: relative;
+    background-color: #00aced;
+    border: none;
+    font-size: 18px;
+    color: #FFFFFF;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.backbutton {
+  position: relative;
+  background-color: #00aced;
+  border: none;
+  font-size: 12px;
+  color: #FFFFFF;
+  padding: 10px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.stopbutton {
+  position: relative;
+  background-color: #ED4337;
+  border: none;
+  font-size: 12px;
+  color: #FFFFFF;
+  padding: 10px;
+  width: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.startbutton {
+  position: relative;
+  background-color: #74AD1B;
+  border: none;
+  font-size: 12px;
+  color: #FFFFFF;
+  padding: 10px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.negative {
+  color: #ED4337;
+}
+
+.positive {
+  color: rgb(124, 181, 236);
+  font-weight: bold;
+}
+
+.sentiment {
+  color: #74AD1B;
 }

@@ -12,4 +12,4 @@ console.log('About to stream some tweets');
 // streamAnalyze('swag', function(data) {
 //     console.log(JSON.stringify(data, null, '  '));
 // });
-streamAnalyze('beer');
+streamAnalyze('coffee');
