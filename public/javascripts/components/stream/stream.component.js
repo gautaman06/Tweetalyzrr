@@ -1,13 +1,32 @@
 app.component('stream', {
     templateUrl: '/javascripts/components/stream/stream.html',
-    controller: function(twitterService, $log, $timeout, $scope, $interval, $state) {
+    controller: function(twitterService, $log, $scope, $interval, $timeout, $state) {
 
       this.tweetText = twitterService.tweetText;
       this.tweetScores = twitterService.tweetScores;
       this.tweetTimes = twitterService.tweetTimes;
       this.filteredResponse = twitterService.filteredResponse;
+      this.positiveResults = twitterService.positiveResults;
 
-      //line chart
+      // Need this to restart stream
+      this.query = twitterService.query;
+      this.restartStream = () => {
+        twitterService.restartStream(this.query);
+        this.poll();
+      }
+
+      // this.positiveResults = this.filteredResponse.filter(tweet => { tweet.tweetScores > 0 });
+      // console.log('positive results:', this.positiveResults);
+      //
+      // this.percentagePositive = this.positiveResults.length / this.filteredResponse.length;
+      // console.log('percentage positive:',this.percentagePositive);
+      //
+      // this.negativeResults = this.filteredResponse.filter(tweet => {
+      //   return tweet.tweetScores < 0;
+      // });
+      //
+      // this.percentageNegative = this.negativeResults.length / this.filteredResponse.length;
+
       this.chartConfig = {
           options: {
               chart: {
@@ -62,22 +81,18 @@ app.component('stream', {
       }; // End of chartconfig1
 
       this.poll = () => {
-          $interval(() => {
-              console.log('polling twitter service')
-              twitterService.getUpdate();
-
-              // this.poll();
+          this.interval = $interval(() => {
+            twitterService.getUpdate();
           }, 1000);
       };
-
+      // Starts polling process
       this.$onInit = () => {
           $log.log("hello");
           twitterService.initialPieChart();
-          $interval(() => {
-            this.poll();
-          }, 50);
-      }; // End of chartConfig
+          this.poll();
+      };
 
+      // Function to stop polling
       this.stopPoll = () => {
         twitterService.stopPolling();
         $interval.cancel(this.interval);

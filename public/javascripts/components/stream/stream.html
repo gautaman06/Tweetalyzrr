@@ -1,10 +1,8 @@
 <div class="wrapper">
-  <h1>Stream Show!</h1>
-
   <button ui-sref="index">Back To Search</button>
-
+  <button ng-click="$ctrl.stopPoll()"> Stop</button>
+  <button ng-click="$ctrl.restartStream($ctrl.query)"> Restart</button>
+  
   <highchart id="chart1" config="$ctrl.chartConfig"></highchart>
-
+  <highchart id="chart2" config="$ctrl.chartConfig2"></highchart>
 </div>
-
-<!-- <highchart id="chart2" config="$ctrl.chartConfig2"></highchart> -->
