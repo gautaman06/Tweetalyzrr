@@ -1,10 +1,24 @@
-<h1>Welcome to Tweetalyze</h1>
-<button ui-sref="show">index</button>
+
+<h1>Tweetalyze</h1>
+
+
+<!-- <h1>Search Search</h1>
+
 <form ng-submit="$ctrl.search()">
     <input ng-model="$ctrl.searchQuery"
            type="text"
            placeholder="Put a hashtag here like #NotMyPresident">
     <input type="submit" value="Tweetalyze It!">
 </form>
+ -->
 
-<p>{{searchQuery}}</p>
+<h1>Stream Search</h1>
+
+<form ng-submit="$ctrl.stream()">
+    <input ng-model="$ctrl.streamQuery"
+           type="text"
+           placeholder="Put a hashtag here like #NotMyPresident">
+    <input type="submit" value="Tweetalyze It!">
+</form>
+
+<!-- <p>{{$ctrl.streamQuery}}</p> -->

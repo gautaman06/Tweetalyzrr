@@ -1,6 +1,6 @@
 'use strict'; // Keeps our code clean
 
-const app = angular.module('tweetalyze', ['ui.router']);
+const app = angular.module('tweetalyze', ['ui.router', 'highcharts-ng']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -19,5 +19,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url: '/show',
 		template: `<show></show>`
 	})
+
+	.state('stream', {
+		url: '/stream',
+		template: `<stream></stream>`
+	})
+
 
 });

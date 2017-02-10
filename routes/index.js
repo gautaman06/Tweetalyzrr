@@ -1,60 +1,47 @@
 const express = require('express');
 const router = express.Router();
-const io = require('../app')
-const streamAnalyze = require('../services/twitter.service');
 
+const streamAnalyze = require('../services/twitter.service').streamAnalyze;
+const streamData = require('../services/twitter.service').streamData;
+const killCurrentStream = require('../services/twitter.service').killCurrentStream;
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-
-// req.body.search is the search the user performs
-// twitterSearch goes, grabs the tweets with that param,
-// sentiment analyzes them
-// and returns an array of objects which look like this:
-// {
-//   "text": "I hate puppies",
-//   "created_at": "Sat Feb 04 21:39:56 +0000 2017",
-//   "sentiment": {
-//     "score": -2,
-//     "comparative": -0.2222222222222222,
-//     "positive": {
-//       "score": 0,
-//       "comparative": 0,
-//       "words": []
-//     },
-//     "negative": {
-//       "score": 2,
-//       "comparative": 0.2222222222222222,
-//       "words": [
-//         "hate"
-//       ]
-//     }
-//   }
-// }
-
-// router.get('/search/:searchQuery', function(req, res, next) {
-//     console.log('this is the req',req.params);
-//     res.json(req.params);
-// });
 router.get('/search/:searchQuery', function(req, res, next) {
   twitterSearch(req.params.searchQuery, function(data) {
     res.json(data);
   });
 });
 
-// router.get('/stream', function(req, res, next) {
-//   console.log(req);
-//   console.log('stream got hit');
-//   streamAnalyze('#MuslimBan');
-//   res.status(200).send
-// });
-//
-// router.get('/stream', function() {
-//   streamAnalyze('#MuslimBan', function(data) {
-//     res.json(data);
-//   });
-// });
+router.get('/stream/test', function(req, res, next) {
+  streamAnalyze('falcons');
+  res.sendStatus(200);
+});
+
+// Route hit by angular at intervals to update data
+router.get('/stream/update', function(req, res, next) {
+  // Slicing off a portion of data from the data stream array to send to client
+  let copyOfStreamData = streamData.slice(0, streamData.length);
+
+  // Empty the array so it can be refilled
+  streamData.length = 0;
+
+  // Send it off to client
+  res.json(copyOfStreamData);
+});
+
+router.get('/stream/stop', function(req, res, next) {
+  killCurrentStream();
+  res.sendStatus(200);
+});
+
+// Initialize the stream running on the server
+router.get('/stream/:streamQuery', function(req, res, next) {
+  streamAnalyze(req.params.streamQuery);
+  res.sendStatus(200);
+  // res.json({text:'we searched with' + req.params.searchQuery})
+});
 
 module.exports = router;

@@ -6,8 +6,15 @@ app.component('search', {
         this.searchQuery = null;
 
         this.search = function() {
-          twitterService.getSearchResults(this.searchQuery);
-
+            console.log(this.searchQuery)
+            twitterService.getSearchResults(this.searchQuery);
         };
+        
+        this.streamQuery = null;
+
+        this.stream = function() {
+            console.log(this.streamQuery);
+            twitterService.startStream(this.streamQuery);
+        }
     }
 });
