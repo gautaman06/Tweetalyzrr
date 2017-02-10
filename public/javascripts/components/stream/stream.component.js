@@ -6,24 +6,8 @@ app.component('stream', {
       this.tweetScores = twitterService.tweetScores;
       this.tweetTimes = twitterService.tweetTimes;
       this.filteredResponse = twitterService.filteredResponse;
-      this.positiveResults = twitterService.positiveResults;
-      this.positivePercentage = twitterService.positivePercentage;
-      console.log('these are the positive results:', this.positiveResults);
-      this.negativePercentage = twitterService.negativePercentage;
-      console.log('these are the positive results:', this.positiveResults);
 
-      // this.positiveResults = this.filteredResponse.filter(tweet => { tweet.tweetScores > 0 });
-      // console.log('positive results:', this.positiveResults);
-      //
-      // this.percentagePositive = this.positiveResults.length / this.filteredResponse.length;
-      // console.log('percentage positive:',this.percentagePositive);
-      //
-      // this.negativeResults = this.filteredResponse.filter(tweet => {
-      //   return tweet.tweetScores < 0;
-      // });
-      //
-      // this.percentageNegative = this.negativeResults.length / this.filteredResponse.length;
-
+      //line chart
       this.chartConfig = {
           options: {
               chart: {
@@ -75,12 +59,14 @@ app.component('stream', {
                   data: this.tweetScores
               }
           ]
-      };
+      }; // End of chartconfig1
 
       this.poll = () => {
           $timeout(() => {
               console.log('polling twitter service')
               twitterService.getUpdate();
+
+
               // Here is where you could poll a REST API or the websockets service for live data
               // this.chartConfig.series[0].data.shift();
               // this.chartConfig.series[0].data.push(Math.floor(Math.random() * 20) + 1);
@@ -90,8 +76,15 @@ app.component('stream', {
 
       this.$onInit = () => {
           $log.log("hello");
-          this.poll();
+          twitterService.initialPieChart();
+          $timeout(() => {
+            this.poll();
+          }, 500);
       }; // End of chartConfig
+
+      // this.stopPoll = () => {
+      //
+      // }
 
       this.chartConfig2 = {
             chart: {
@@ -124,11 +117,11 @@ app.component('stream', {
                 colorByPoint: true,
                 data: [{
                     name: 'Positive',
-                    y: this.positivePercentage
+                    y: twitterService.positivePercentage
                 }, {
                     name: 'Negative',
                     color: '#ED4337',
-                    y: this.negativePercentage,
+                    y: twitterService.negativePercentage,
                     sliced: true,
                     selected: true
                 }]

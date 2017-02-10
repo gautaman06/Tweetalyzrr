@@ -27,6 +27,9 @@ app.service('twitterService', function($http, $state, $interval) {
     this.filteredResponse = [];
     this.positiveResults = [];
     this.negativeResults = [];
+
+    this.positivePercentage = null;
+    this.negativePercentage = null;
     let timer = null;
 
     // Initiate stream on the server by passing it a query
@@ -72,6 +75,20 @@ app.service('twitterService', function($http, $state, $interval) {
         console.log('here is our negative percentage', this.negativePercentage);
       });
     };
+
+    this.initialPieChart = () => {
+        // let positiveResults = this.filteredResponse.filter( tweet => tweet.sentiment.score > 0);
+        // this.positiveResults.push.apply(this.positiveResults, positiveResults);
+
+        this.positivePercentage = .50;
+        console.log('here is our positive percentage', this.positivePercentage);
+
+        // let negativeResults = this.filteredResponse.filter( tweet => tweet.sentiment.score < 0);
+        // this.negativeResults.push.apply(this.negativeResults, negativeResults);
+
+        this.negativePercentage = .50;
+        console.log('here is our negative percentage', this.negativePercentage);
+      };
 
     this.stopPolling = () => {
       if (angular.isDefined(timer)) {
