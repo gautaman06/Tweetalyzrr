@@ -87,18 +87,18 @@ app.service('twitterService', function($http, $state, $interval) {
         let tweetText   = filteredResponse.map( tweet => tweet.text );
         this.tweetText.push.apply(this.tweetText, tweetText);
 
-        //Pie chart data
-        let positiveResults = filteredResponse.filter( tweet => tweet.sentiment.score > 0);
-        this.positiveResults.push.apply(this.positiveResults, positiveResults);
+        // //Pie chart data
+        // let positiveResults = filteredResponse.filter( tweet => tweet.sentiment.score > 0);
+        // this.positiveResults.push.apply(this.positiveResults, positiveResults);
 
-        this.positivePercentage = this.positiveResults.length / this.filteredResponse.length;
-        console.log('here is our positive percentage', this.positivePercentage);
+        // this.positivePercentage = this.positiveResults.length / this.filteredResponse.length;
 
-        let negativeResults = filteredResponse.filter( tweet => tweet.sentiment.score < 0);
-        this.negativeResults.push.apply(this.negativeResults, negativeResults);
 
-        this.negativePercentage = this.negativeResults.length / this.filteredResponse.length;
-        console.log('here is our negative percentage', this.negativePercentage);
+        // let negativeResults = filteredResponse.filter( tweet => tweet.sentiment.score < 0);
+        // this.negativeResults.push.apply(this.negativeResults, negativeResults);
+
+        // this.negativePercentage = this.negativeResults.length / this.filteredResponse.length;
+
       });
     };
 

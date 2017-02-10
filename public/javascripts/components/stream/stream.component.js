@@ -6,8 +6,12 @@ app.component('stream', {
       this.tweetScores = twitterService.tweetScores;
       this.tweetTimes = twitterService.tweetTimes;
       this.filteredResponse = twitterService.filteredResponse;
-      this.positiveResults = twitterService.positiveResults;
 
+      let vm = this;
+      vm.positivePercentage = 50;
+      vm.negativePercentage = 50;
+
+      $interval(function() {console.log('this is percentage outside the interval', vm.positivePercentage, vm.negativePercentage)}, 1000)
       // Need this to restart stream
       this.query = twitterService.query;
       this.restartStream = () => {
@@ -83,12 +87,15 @@ app.component('stream', {
       this.poll = () => {
           this.interval = $interval(() => {
             twitterService.getUpdate();
+            vm.negativePercentage = this.filteredResponse.filter(tweet => tweet.sentiment.score < 0).length / this.filteredResponse.length
+            vm.positivePercentage = this.filteredResponse.filter(tweet => tweet.sentiment.score > 0).length / this.filteredResponse.length
+            console.log('percentages inside', vm.positivePercentage, vm.negativePercentage )
           }, 1000);
       };
       // Starts polling process
       this.$onInit = () => {
           $log.log("hello");
-          twitterService.initialPieChart();
+        //   twitterService.initialPieChart();
           this.poll();
       };
 
@@ -129,11 +136,11 @@ app.component('stream', {
                 colorByPoint: true,
                 data: [{
                     name: 'Positive',
-                    y: twitterService.positivePercentage
+                    y: vm.positivePercentage
                 }, {
                     name: 'Negative',
                     color: '#ED4337',
-                    y: twitterService.negativePercentage,
+                    y: vm.negativePercentage,
                     sliced: true,
                     selected: true
                 }]
