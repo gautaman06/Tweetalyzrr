@@ -1,7 +1,6 @@
 <div class="wrapper">
   <div class="searchblock">
-    <h1 class="titleblock">Tweetalyze</h1>
-
+    <h1 class="title">Tweetalyze</h1>
     <form ng-submit="$ctrl.stream()">
         <input ng-model="$ctrl.streamQuery"
                class="searchbar"
@@ -13,19 +12,11 @@
       To search for a user's tweets, start search with an @
     </p>
   </div>
-  <div class="about">
-    <p>
-      Tweetalyze is a data visualization tool which displays real-time sentiment
-      analysis of tweets on any given topic. It is built on a Node.js backend paired
-      with an AngularJS 1.6 frontend. The Twitter Streaming API provides the real-time
-      Twitter stream, and the Node.js Sentimental package performs the
-      sentiment analysis. HighCharts.js coupled with the highcharts-ng
-      Angular wrapper is used for charting.
-    </p>
-    <p>
-      This app was developed by <a href="https://github.com/ccparkhurst">Christina
-      Parkhurst</a> and <a href="https://github.com/wallerGoble">Waller Goble</a>.
-    </p>
-  </div>
-
 </div>
+
+  <div class="footer">
+    <span><a ui-sref="about">About this page.</a></span></br>
+    <span>Developed by <a href="https://github.com/ccparkhurst">Christina
+    Parkhurst</a> and <a href="https://github.com/wallerGoble">Waller Goble</a>.
+    </span>
+  </div>
