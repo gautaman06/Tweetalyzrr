@@ -33,8 +33,33 @@ app.service('twitterService', function($http, $state, $interval) {
     this.negativePercentage = null;
     let timer = null;
 
+
+    // Save search query in service so we can use it later to restart stream
+    this.query = null;
+
     // Initiate stream on the server by passing it a query
     this.startStream = (streamQuery) => {
+      // Reset all of these arrays to 0 for when we start a new query
+      this.tweetScores.length = 0;
+      this.tweetTimes.length = 0;
+      this.tweetText.length = 0;
+      this.filteredResponse.length = 0;
+
+      // Saving this for restarting the stream
+      this.query = streamQuery;
+
+      $http.get('/stream/' + streamQuery).then( (response) => {
+        $state.go('stream')
+        this.getUpdate();
+        // timer = $interval( () => {
+        //   console.log('we are polling');
+        //   this.getUpdate();
+        // }, 3000);
+      });
+    };
+    // Restart stream from stream view page
+    this.restartStream = (streamQuery) => {
+      this.query = streamQuery;
       $http.get('/stream/' + streamQuery).then( (response) => {
         $state.go('stream')
         this.getUpdate();
