@@ -34,9 +34,6 @@ app.component('stream', {
               }
           },
 
-          title: {
-              text: 'Sentiment Analysis'
-          },
           yAxis: {
               min: -15,
               max: 15,

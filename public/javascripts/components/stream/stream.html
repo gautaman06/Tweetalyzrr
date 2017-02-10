@@ -1,8 +1,9 @@
 <div class="wrapper">
-  <button ui-sref="index">Back To Search</button>
-  <button ng-click="$ctrl.stopPoll()"> Stop</button>
-  <button ng-click="$ctrl.restartStream($ctrl.query)"> Restart</button>
-  
+  <h1 class="titleStream">Tweetalyze</h1>
   <highchart id="chart1" config="$ctrl.chartConfig"></highchart>
+  <button class="backbutton" ui-sref="index">Back</button>
+  <button class="stopbutton" ng-click="$ctrl.stopPoll()"> Stop</button>
+  <button class="startbutton" ng-click="$ctrl.restartStream($ctrl.query)"> Restart</button>
+
   <highchart id="chart2" config="$ctrl.chartConfig2"></highchart>
 </div>
