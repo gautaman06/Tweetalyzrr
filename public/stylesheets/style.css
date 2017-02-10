@@ -1,14 +1,63 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
 }
 
 a {
   color: #00B7FF;
 }
 
+.searchbar {
+  max-width: 40rem;
+  margin: 0 auto;
+  /*display: block;*/
+  width: 100%;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  /*padding: 1.5rem 2rem;*/
+  font-size: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  /*border: 0;*/
+  text-align: center;
+
+  /*animation: fade-in 300ms 1100ms forwards ;*/
+  /*@include placeholder {*/
+    /*font-family: 'Bangers', cursive;*/
+    /*letter-spacing: 0.03em;
+  }*/
+}
+
+.wrapper {
+  padding: 3rem 1rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
+  font-size: 68px;
+  letter-spacing: 0.07em;
+  margin-bottom: 0;
+}
+
 #chart1 {
   width: 90%;
   height: 25rem;
   margin: 0 auto;
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
 }

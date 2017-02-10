@@ -1,24 +1,22 @@
+<div class="wrapper">
+  <div class="searchblock">
+    <h1 class="title">Tweetalyze</h1>
+    <form ng-submit="$ctrl.stream()">
+        <input ng-model="$ctrl.streamQuery"
+               class="searchbar"
+               type="text"
+               placeholder="Search for...">
+        <input type="submit" class="tweetalyzeit" value="Tweetalyze It!">
+    </form>
+    <p>
+      To search for a user's tweets, start search with an @
+    </p>
+  </div>
+</div>
 
-<h1>Tweetalyze</h1>
-
-
-<!-- <h1>Search Search</h1>
-
-<form ng-submit="$ctrl.search()">
-    <input ng-model="$ctrl.searchQuery"
-           type="text"
-           placeholder="Put a hashtag here like #NotMyPresident">
-    <input type="submit" value="Tweetalyze It!">
-</form>
- -->
-
-<h1>Stream Search</h1>
-
-<form ng-submit="$ctrl.stream()">
-    <input ng-model="$ctrl.streamQuery"
-           type="text"
-           placeholder="Put a hashtag here like #NotMyPresident">
-    <input type="submit" value="Tweetalyze It!">
-</form>
-
-<!-- <p>{{$ctrl.streamQuery}}</p> -->
+  <div class="footer">
+    <span><a ui-sref="about">About this page.</a></span></br>
+    <span>Developed by <a href="https://github.com/ccparkhurst">Christina
+    Parkhurst</a> and <a href="https://github.com/wallerGoble">Waller Goble</a>.
+    </span>
+  </div>
