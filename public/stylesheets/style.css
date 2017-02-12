@@ -148,3 +148,9 @@ input {
 .sentiment {
   color: #74AD1B;
 }
+
+.about {
+
+  align-items: center;
+  text-align: left;
+}
