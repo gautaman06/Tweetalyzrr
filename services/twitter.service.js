@@ -9,10 +9,15 @@ const twitter = require('twitter');
 const analyze = require('Sentimental').analyze;
 
 // Here be API keys
-const config = require('../secrets');
+let keys = require('../secrets');
 
 // Initialize a twitter client with that config
-const twitterClient = new twitter(config);
+const twitterClient = new twitter({
+  consumer_key: process.env.TWITTER_CONSUMER_KEY || keys.consumer_key,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET || keys.consumer_secret,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN || keys.access_token_key,
+  access_token_secret: process.env.TWITTER_TOKEN_SECRET || keys.access_token_secret
+});
 
 /**
  * Get 100 tweets based on a search input
