@@ -40,7 +40,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 					<li><a href="https://nodejs.org/en/" target="_blank">Node.js</a></li>
 					<li><a href="http://expressjs.com/" target="_blank">Express.js</a></li>
 					<li><a href="https://github.com/thinkroth/Sentimental" target="_blank">Sentimental npm</a></li>
-					<li><a href="https://dev.twitter.com/streaming/overviewTwitter" target="_blank"> Streaming API</a></li>
+					<li><a href="https://dev.twitter.com/streaming/overviewTwitter" target="_blank">Twitter Streaming API</a></li>
 					<li><a href="https://angularjs.org/" target="_blank">Angular.js 1.6</a></li>
 					<li><a href="http://www.highcharts.com/" target="_blank">Highcharts.js</a> and the <a href="https://github.com/pablojim/highcharts-ng" target="_blank">highcharts-ng Angular wrapper</a></li>
 				</ul>
