@@ -13,10 +13,10 @@ const analyze = require('Sentimental').analyze;
 
 // Initialize a twitter client with that config
 const twitterClient = new twitter({
-  consumer_key: process.env.TWITTER_CONSUMER_KEY,
-  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-  //access_token_key: process.env.TWITTER_ACCESS_TOKEN,
-  //access_token_secret: process.env.TWITTER_TOKEN_SECRET
+  consumer_key: 'B5WWza08RMpxojNhNwh4pRRSQ',
+  consumer_secret: 'zQtMk2FsaZ0r5Dg7n3HPzjxI1CbeWyfxP5O3VopcF8MOOv9vYU',
+  access_token_key:  '877800511717515264-uYnzuhn5GvE1qeJTGlde48WO03rCA25',
+  access_token_secret: 'a4YwVTAy8wqFZkbethsvcbw0RUEMebD2pf53vyoa2OjiT'
 });
 
 /**
